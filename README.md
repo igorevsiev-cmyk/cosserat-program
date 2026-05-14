@@ -15,7 +15,7 @@ This repository hosts the preprints, supplementary data, and code accompanying t
 
 | # | Topic | Folder | Status |
 |---|---|---|---|
-| 1 | **SI reduction & fine-structure constant** | [`papers/2026-05-SI-reduction/`](papers/2026-05-SI-reduction/) | preprint v1.1 |
+| 1 | **SI reduction & fine-structure constant** | [`papers/2026-05-SI-reduction/`](papers/2026-05-SI-reduction/) | preprint v2 |
 
 Forthcoming papers in the same series (in preparation, will appear here as they are released):
 
@@ -28,7 +28,7 @@ Forthcoming papers in the same series (in preparation, will appear here as they 
 
 ## Supplementary verifications
 
-- [`verifications/anisotropy_scan/`](verifications/anisotropy_scan/) — independent numerical check of the geometric identity `r_v = l₀ / 2` used in the derivation of `α_bare = 1/128` (§7.3 of the first paper).
+- [`verifications/canonical_derrick/`](verifications/canonical_derrick/) — independent Derrick scan of the full canonical functional (§7.3 of the first paper): confirms that the canonical Hopf ansatz is the energy minimum, with `m_e = 510.93 keV` (Δ = 0.014 % from experiment) and topology preserved across the scan.
 
 ## Status
 

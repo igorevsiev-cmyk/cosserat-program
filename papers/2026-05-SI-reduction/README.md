@@ -1,6 +1,6 @@
 # SI Reduction via the Cosserat-continuum hypothesis
 
-Preprint v1.1 (2026-05-12).
+Preprint v2 (2026-05-14).
 
 > **Structural reduction of the SI base of units via the Cosserat-continuum hypothesis: electromagnetic and gravitational quantities as mechanical objects of an elastic medium**
 > Ihar Yeusiyevich, 2026
@@ -27,7 +27,7 @@ PDF versions will be added after final DOI assignment.
 
 ## Supplementary verifications
 
-- [`../../verifications/anisotropy_scan/`](../../verifications/anisotropy_scan/) — numerical check of `r_v = l₀ / 2` (§7.3).
+- [`../../verifications/canonical_derrick/`](../../verifications/canonical_derrick/) — Derrick scan of the full canonical functional (§7.3): confirms `λ = 1` is the energy minimum, with `m_e = 510.93 keV` (Δ = 0.014 % from experiment) and `Q` preserved across the scan.
 
 ## Citation
 

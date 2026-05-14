@@ -2,7 +2,7 @@
 
 **Author:** Yeusiyevich Ihar V.
 **Date:** 2026-05-12
-**Version:** 1.1 (preprint)
+**Version:** 2 (preprint)
 **License:** CC-BY 4.0
 
 ---
@@ -18,7 +18,7 @@ The framework rests on four identifications between parameters of the medium and
 - **P3:** `ℏ` — the quantum of action of microrotations of the medium;
 - **P4:** `G` enters through the Kleinert gauge mechanism (`u`-channel of translations).
 
-Already from P1 and P2 the speed of the transverse Cosserat wave comes out exactly equal to the speed of light: `c_T = √(G_shear/ρ) = 1/√(ε₀μ₀) ≡ c_light` — with no tuning, using the bare experimental values of `μ₀, ε₀`. From there everything unfolds on its own: the ampere becomes a deformation circulation with dimension `[m²/s]`, the coulomb becomes the cross-sectional area of a defect `[m²]`, and the whole base `{m, kg, s, A}` reduces to a single dimension — length (or, equivalently, energy). The gravitational constant acquires the structural form `G = c⁴ε₀/(16π l_G²)`, where `l_G ≈ 4.62 × 10¹⁵ m` is the characteristic scale of the `u`-channel; the famous Planck length turns out **not** to be fundamental but derived: `l_P = l₀²/(2√2 · l_G)`.
+Already from P1 and P2 the mechanical expression `c_T = √(G_shear/ρ)` for the transverse Cosserat wave speed, after substitution, coincides with **Maxwell's formula** for the speed of electromagnetic waves: `c_T = 1/√(ε₀μ₀) ≡ c_light`. This is the same classical identity that Maxwell obtained from his elastic-aether model in 1861–62 (and that in SI 2019 is fixed by the definition of `c`); here it arises as a **direct mechanical consequence** of the Cosserat identifications, without any additional parameters. The coincidence `c_T = c_light` is therefore not a prediction of the program but its **necessary boundary condition**: any model in which P1 and P2 take this form must recover Maxwell's `c`. From there everything unfolds on its own: the ampere becomes a deformation circulation with dimension `[m²/s]`, the coulomb becomes the cross-sectional area of a defect `[m²]`, and the whole base `{m, kg, s, A}` reduces to a single dimension — length (or, equivalently, energy). The gravitational constant acquires the structural form `G = c⁴ε₀/(16π l_G²)`, where `l_G ≈ 4.62 × 10¹⁵ m` is the characteristic scale of the `u`-channel; the famous Planck length turns out **not** to be fundamental but derived: `l_P = l₀²/(2√2 · l_G)`.
 
 **Local minima of the functional and identification with particles.** In the same structure (P1–P4 plus the geometry of an `S²`-target director field) the functional `E[n, u]` admits stable localized minima with integer topological charge `Q_H ∈ π₃(S²) = ℤ` — a consequence of the medium itself, not an extra postulate. Empirically the minimum with `Q_H = -1` is identified with the electron (the one with `Q_H = +1` with the positron); direct numerical relaxation yields a mass consistent with the experimental `m_e ≈ 511 keV` [10]. In this sense the program contains no "separate predictions" stacked on top of the postulates: there is one cascade of consequences from the structure of the medium, and the existence of particles as topological knots of the field is one of its links — on a par with `c = c_light`, the dimensional reduction, and the value of `α`.
 
@@ -28,9 +28,9 @@ Combined with the dimensional reduction `[Q] ↔ [m²]`, this yields a direct nu
 
 — a **bare** value of the fine-structure constant, obtained without using the experimental `α` on the right-hand side. Agreement with the measured `α(M_Z) = 1/128.9` at the Z-boson scale is 0.7%. The discrepancy with the familiar low-energy value `1/137` is the standard QED renormalization through vacuum polarization by virtual pairs; in our picture `1/128` plays the role of a UV boundary condition for the renormalization-group equations.
 
-The bottom line in one sentence: the canonical set of fundamental constants of nature reduces to `{ε₀, μ₀, ℏ, G}`; everything else is computable. Operationally this is equivalent to the standard natural units `ℏ = c = G = 1`, but the justification is different — not "convenience of notation" but a structural removal of redundancy from SI. The linearized Cosserat metric reproduces all five classical tests of GR (perihelion precession of Mercury, deflection of light by the Sun, Shapiro delay, gravitational redshift, gravitational waves travelling at `c`); the differences from pure GR are torsion at Planckian densities (Einstein–Cartan) and a massive Cosserat mode at the scale `l_K ≈ 202 nm`. Both features are falsifiable.
+The bottom line: the canonical set of fundamental constants of nature reduces to `{ε₀, μ₀, ℏ, G}`; everything else is computable. Operationally this is equivalent to the standard natural units `ℏ = c = G = 1`, but the justification is different — not "convenience of notation" but a structural removal of redundancy from SI. The linearized Cosserat metric reproduces all five classical tests of GR (perihelion precession of Mercury, deflection of light by the Sun, Shapiro delay, gravitational redshift, gravitational waves travelling at `c`); the differences from pure GR are torsion at Planckian densities (Einstein–Cartan) and a massive Cosserat mode at the scale `l_K ≈ 202 nm`. Both features are falsifiable.
 
-**Status and scope of the claims.** This is not a proposal to redefine the SI: the SI base units remain as defined by CGPM in 2019. The claim is only that, conditional on the postulates P1–P4, there is a one-to-one mapping between the SI quantities and the mechanical dimensions of a Cosserat continuum. The reduction itself is a preparatory construction for subsequent papers in which, from `{ε₀, μ₀, ℏ}` via minimization of the Cosserat functional, the electron mass is derived to a relative accuracy of `7 × 10⁻⁵`.
+**Status and scope of the claims.** This is not a proposal to redefine the SI: the SI base units remain as defined by CGPM in 2019. The claim is only that, conditional on the postulates P1–P4, there is a one-to-one mapping between the SI quantities and the mechanical dimensions of a Cosserat continuum. The reduction itself is a preparatory construction for subsequent papers in which, from `{ε₀, μ₀, ℏ}` via minimization of the Cosserat functional, the electron mass is obtained in agreement with the experimental `m_e ≈ 511 keV` to a precision limited only by the grid resolution (of order `10⁻⁴` on the grids in current use), with no free parameters.
 
 **Keywords:** Cosserat continuum, electromagnetic units, dimensional analysis, mechanical interpretation, natural units, structural reduction, micropolar elasticity, Kleinert gauge theory, defect-induced gravity, Einstein–Cartan theory.
 
@@ -794,7 +794,11 @@ The balance condition (Derrick stability) fixes `L_Skyrme = l₀`. For a hopfion
 r_v = L_Skyrme/2 = l₀/2 (7.5)
 ```
 
-**Numerical confirmation** [10]: scanning the anisotropy `K₃/K₁ ∈ [3.5, 7.5]` (a plateau of 4 points) on a 768×1536 grid yields `r_v/L ≈ 0.498 ± 0.005`, confirming (7.5) within the discretization.
+![Canonical electron hopfion (`Q_H = -1`) at `R_r = 0.5148`, `R_z = 0.7552`, `w = 0.6275`. The colored panels are 2D slices through the (`r ≥ 0`, `z`) half-plane; axial symmetry makes a single such slice sufficient to encode the full field. **Top-left:** `n_z(r, z)` — the `z`-component of the director. The red background (`n_z ≈ +1`) is the vacuum; the blue spot (`n_z = -1`) is the vortex tube core; black contours mark the levels `n_z = -0.5, 0, +0.5`. **Top-right:** `|n_⊥|(r, z)` — the magnitude of the in-plane components; highlights the shell where the director "lies sideways" and sets the tube radius `r_v ≈ 0.5 ℓ_0`. **Bottom-left:** the topological charge density `ρ_Q = n·(∂_r n × ∂_z n)`; localized near the tube and negative (its volume integral equals `Q_H = -1`). **Bottom-right:** 3D shape with a 90°-wedge cut out (3/4 of a full revolution shown); the red surface is the iso-contour `n_z = -0.5` (the body of the soliton) obtained by revolving the 2D cross-section around the symmetry axis; the black arc is the vortex tube axis (`n = -ẑ`, a circle of radius `R_r` in the plane `z = 0`); the two black dots on the cut faces mark its endpoints. All panels use the exact Hopf-ansatz formula. Reproduced by `verifications/canonical_derrick/hopfion_visualize.py`.](../../verifications/canonical_derrick/hopfion_visualize.png)
+
+**Numerical confirmation** [10]. The full canonical functional (all Cosserat terms, `K₃/K₁ = 1+2π`, `m² = η/(4π) = 1/2`, `μ_c = 2π`) is verified on a 768×1536 grid via a **Derrick scan**: rescaling the Hopf ansatz `(R_r, R_z) → λ·(R_r, R_z)` over `λ ∈ [0.6, 3.0]` produces a clean V-minimum **at λ = 1**, with `E_tot(λ=1) = 510.93 keV` (Δ = 0.014 % from the experimental `m_e = 510.999 keV`). The empirical scaling laws of the four energy components — `E_OF ∝ λ`, `E_Sk ∝ λ⁻¹`, `E_mass ∝ λ³`, `E_u ∝ λ²` (the last because the Cosserat screening length `l_c = 1/√μ_c` is **fixed** in absolute units and does not co-scale with the soliton) — reproduce the expected Derrick exponents, and the Derrick residual `dE/dλ|_{λ=1} = E_OF − E_Sk + 3·E_mass + 2·E_u = +9.7 keV` is consistent with the discrete sampling spacing. The topological charge is preserved (`|Q+1| < 5·10⁻⁵`) across the entire scan. The geometric identity (7.5) `r_v = l₀/2` is thereby **embedded in the Derrick balance of the full functional**: the canonical triple `(R_r, R_z, w)` is a genuine energy minimum, not an arbitrarily chosen point. *Remark on the origin of the parameters.* The numerical values `(R_r, R_z, w) ≈ (0.5148, 0.7552, 0.6275)` were obtained in [10] by a direct full-field minimization of the functional `E[n, u]`; they are taken here as already-known and tested for stationarity along the `λ` direction.
+
+![Derrick scan of the canonical electron configuration. Left: total energy `E_tot(λ)` (V-shape with minimum at `λ = 1.00`, falling on the experimental `m_e = 510.999 keV`). Right: the four energy components on a log scale (`E_OF ∝ λ`, `E_Sk ∝ λ⁻¹`, `E_mass ∝ λ³`, `E_u ∝ λ²`). Canonical parameters: `K₁ = K₂ = 2`, `K₃ = 14.56`, `c₄ = 1`, `m² = 0.5`, `μ_c = 2π`. Reproduced by `verifications/canonical_derrick/derrick_scan.py`.](../../verifications/canonical_derrick/derrick_scan.png)
 
 Hence (7.5) is a **derived** relation, not a postulate. The only postulate that remains is P5, the statement of circular cross-sectional geometry.
 
@@ -952,6 +956,35 @@ e² · G_shear = 4π · ℏcα = const (7.16)
 ```
 
 The connection between the **charge squared** (interaction area) and the **channel stiffness** (shear modulus of the Cosserat medium). At fixed `α`, a larger charge requires a less stiff medium and vice versa.
+
+#### Equivalent forms of Hyperbola II: stiffness, density, impedance
+
+Because P1 and P2 link the medium parameters through the wave relation `c² = (1/ε₀)/μ₀`, the identity (7.15) admits **three** equivalent rewritings — through the stiffness, the density, and the impedance of the medium:
+
+```
+e² · (1/ε₀)   = 4π · ℏc · α (7.16a — via stiffness G ≡ 1/ε₀)
+e² · μ₀       = 4π · ℏα / c (7.16b — via density ρ ≡ μ₀)
+e² · Z₀       = 4π · ℏ · α (7.16c — via impedance Z₀ = μ₀c)
+```
+
+Algebraically these are one identity; physically each form highlights a different side of the "charge ↔ medium" coupling, mirroring the symmetry of the LC cell (§5.5a, where `ω = 1/√(LC)`, `L ~ μ₀l`, `C ~ ε₀l`):
+
+| Form | What it fixes | LC analogue |
+|---|---|---|
+| `e²·(1/ε₀)` | potential (elastic) energy of the charge | capacitance `C` |
+| `e²·μ₀` | kinetic (inertial) energy of the charge | inductance `L` |
+| `e²·Z₀` | action at resonance (geometric mean) | impedance `√(L/C)` |
+
+Form (7.16b) makes the parallel with Hyperbola I literal:
+
+```
+Hyperbola I:   m · l = ℏ/c (single particle × length)
+Hyperbola II:  e² · μ₀ = 4π α · ℏ/c (charge² × medium density)
+```
+
+The left-hand sides of both have the same dimension `kg·m` and are multiples of `[ℏ/c]`. In the second form, `e²·μ₀` reads as "volume of the charged region × density of the medium" = mass of displaced medium — an Archimedean analogy for the charge. The two hyperbolas differ only by the dimensionless factor `4π α`: the first fixes a point of a single particle, the second the coupling of the charge to the inertia of the medium.
+
+Remark on dimensions: `[μ₀] = kg/m³`, `[e²] = m⁴`, hence `[e²·μ₀] = kg·m ≡ [ℏ/c]`. Similarly `[Z₀] = [μ₀c] = kg/(m²·s) = N·s/m³ = Pa·s/m` — the mechanical acoustic impedance of the medium (§6.2).
 
 #### Physical interpretation of Hyperbola II
 
@@ -1220,6 +1253,48 @@ m_P = ℏ/(c · l_P) = 2√2 · ℏ · l_G / (c · l₀²) ≈ 2.18 × 10⁻⁸ 
 
 > **Note to the reader.** The formula `l_P = l₀²/(2√2·l_G)` geometrically means that **the Planck length is the "geometric mean"** of the two structural scales of the two channels (up to a constant): `l_P ~ √(l₀² · l₀²/l_G²)`. A small `l₀` (nanometers) and a huge `l_G` (parsecs) combine to give `~10⁻³⁵` m — the Planck length. In our picture the Planck length is therefore an intersection of two already known structural scales.
 
+#### Equivalent rewriting: `l₀` as the geometric centre of the hierarchy
+
+The identity (8.9) admits an algebraically equivalent regrouping that places **`l₀`** at the centre instead of `l_P`:
+
+```
+l₀² = 2√2 · l_P · l_G   ⟺   l₀ = ⁴√8 · √(l_P · l_G) ≈ 1.68 · √(l_P · l_G) (8.10a)
+```
+
+That is, **the structural length `l₀` of the EM channel is the geometric mean of `l_P` and `l_G`** up to a factor `⁴√8`. Numerical check on the log scale:
+
+```
+log₁₀(l_P) = −34.79 (micro boundary, n ∩ u)
+log₁₀(l₀) = −9.34 (geometric centre)
+log₁₀(l_G) = +15.66 (macro boundary, u-channel)
+
+l₀ → l_P: 25.45 decades down
+l₀ → l_G: 25.00 decades up
+```
+
+The mismatch of **0.45 decades** equals `log₁₀(⁴√8) ≈ 0.45` — that is, `l₀` sits **symmetrically** between `l_P` and `l_G` up to exactly the same factor `(2√2)^(1/2)` that enters (8.9).
+
+| Length | Position | Nature |
+|---|---|---|
+| `l_P` | micro boundary | intersection λ ↔ r_s of a single mass (Section 7.9, Compton–Schwarzschild duality) |
+| **`l₀`** | **geometric centre** | structure of the EM channel, intersection point of the `n` and `u` channels of the medium |
+| `l_G` | macro boundary | structural scale of the `u`-channel (P4) |
+
+> **Interpretation.** Formula (8.10a) gives a reading of (8.9) "from the other side": `l_P` is not a "fundamental Planck scale" that happens to be decomposable; rather, **`l₀` is the natural centre of the hierarchy**, symmetrically dividing the entire gravitational–quantum range of lengths into two (logarithmically) almost equal halves. That the vacuum EM structure sits at the geometric centre, while Planck and `l_G` are symmetric about it, is an algebraic consequence of (8.9), not an independent postulate.
+
+**Where the factor `2√2` comes from.** Perfect symmetry `l₀² = l_P · l_G` would hold with no prefactor at all. The actual factor `2√2 = √8` has a concrete structural origin: substituting `G = c⁴ε₀/(16π l_G²)` (P4) and `ε₀ℏc = 2π·l₀⁴` (T10) into `l_P² = ℏG/c³` gives
+
+```
+l_P² = (2π · l₀⁴) / (16π · l_G²) = l₀⁴/(8 · l_G²)
+```
+
+— the factor **`8 = 16π/2π`** is the ratio of the **normalisation of P4 to the normalisation of T10**. The origin of each:
+
+- `16π` in P4 — the standard Hilbert–Einstein action constant `S_EH = (c⁴/(16πG)) ∫ R √-g d⁴x`, fixed by the requirement of the correct Newtonian limit. It enters our program **through the Kleinert gauge mechanism (§8.2)**, where the elastic action is identified with the EH action.
+- `2π` in T10 — the Cosserat coupling `η = 2π`, a topological invariant of the sphere `S²` (Section 7).
+
+So `2√2` is a trace of the fact that **the gravitational and EM channels use different normalisations** (one is the standard GR one, the other comes from intrinsic `S²` geometry), not an independent hyperbola. On the log scale this gives exactly `log₁₀(√8) ≈ 0.45` decades — the observed asymmetry between `l₀→l_P` (25.45 decades) and `l₀→l_G` (25.00 decades). With a consistent normalisation (if P4 used the coefficient `2π`, like η in the `n`-channel), the symmetry would be **exact**: `l₀² = l_P · l_G`.
+
 ### 8.5. The full hierarchy of scales and closure of the unit base
 
 Combining the results of Sections 5.4, 5.5, 8.3, and 8.4:
@@ -1356,7 +1431,7 @@ The program of dimensional reduction of the SI has been carried out within a two
 
 The present paper opens a series of six related publications developing different aspects of the Cosserat program:
 
-**Work [10] — electron mass.** "Derivation of electron mass from `{ε₀, μ₀, ℏ}` via Cosserat functional minimization" — in preparation. Uses the dimensional reduction of the present paper to formulate the variational problem. Result: `m_e = 511.033 keV` (relative accuracy `7 × 10⁻⁵`), with no free parameters.
+**Work [10] — electron mass.** "Derivation of electron mass from `{ε₀, μ₀, ℏ}` via Cosserat functional minimization" — in preparation. Uses the dimensional reduction of the present paper to formulate the variational problem. Result: on a canonical 1024×2048 grid the numerical `m_e ≈ 511.03 keV`, which differs from the experimental `510.999 keV` by less than `10⁻⁴` — within the discretization error of the grid itself; with no free parameters.
 
 **Work [24] — fine-structure constant.** "Topological charge and the fine-structure constant in the Cosserat picture" — in preparation. Full derivation of `α_bare = 1/128 = 2⁻⁷` and analysis of the QED renormalization down to the observed `1/137`.
 
@@ -1591,7 +1666,7 @@ Reproducible code is available in the repository:
 https://github.com/igorevsiev-cmyk/cosserat-program
 ```
 
-Supplementary materials specific to this preprint are located under `papers/2026-05-SI-reduction/`. An independent numerical verification of `r_v = l₀ / 2` (§7.3) is in `verifications/anisotropy_scan/`.
+Supplementary materials specific to this preprint are located under `papers/2026-05-SI-reduction/`. An independent numerical verification of the Derrick balance of the canonical configuration (§7.3) is in `verifications/canonical_derrick/`.
 
 An embargoed Zenodo copy of this preprint is registered on Zenodo with DOI:
 
@@ -1603,4 +1678,4 @@ https://doi.org/10.5281/zenodo.20162265
 
 **End of main text.**
 
-*Version 1.1. Comments and feedback are welcome at: igorevsiev@gmail.com.*
+*Version 2. Comments and feedback are welcome at: igorevsiev@gmail.com.*
