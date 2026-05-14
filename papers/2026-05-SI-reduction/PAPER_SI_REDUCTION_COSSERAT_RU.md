@@ -1667,11 +1667,13 @@ https://github.com/igorevsiev-cmyk/cosserat-program
 
 Сопроводительные материалы конкретно к этому препринту лежат в подпапке `papers/2026-05-SI-reduction/`. Независимая численная проверка Деррик-баланса канонической конфигурации (§7.3) — в `verifications/canonical_derrick/`.
 
-Embargoed Zenodo-копия настоящего препринта зафиксирована в репозитории Zenodo с DOI:
+Zenodo-копия настоящего препринта зафиксирована с DOI:
 
 ```
-https://doi.org/10.5281/zenodo.20162265
+https://doi.org/10.5281/zenodo.20187199
 ```
+
+(Предыдущая версия v1.1: `10.5281/zenodo.20162265`.)
 
 ---
 

@@ -31,5 +31,6 @@ PDF versions will be added after final DOI assignment.
 
 ## Citation
 
-- **Zenodo DOI:** [10.5281/zenodo.20162265](https://doi.org/10.5281/zenodo.20162265)
+- **Zenodo DOI (v2):** [10.5281/zenodo.20187199](https://doi.org/10.5281/zenodo.20187199)
+- **Zenodo DOI (v1.1):** [10.5281/zenodo.20162265](https://doi.org/10.5281/zenodo.20162265)
 - **arXiv ID:** *pending*

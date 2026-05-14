@@ -1668,11 +1668,13 @@ https://github.com/igorevsiev-cmyk/cosserat-program
 
 Supplementary materials specific to this preprint are located under `papers/2026-05-SI-reduction/`. An independent numerical verification of the Derrick balance of the canonical configuration (§7.3) is in `verifications/canonical_derrick/`.
 
-An embargoed Zenodo copy of this preprint is registered on Zenodo with DOI:
+A Zenodo copy of this preprint is registered with DOI:
 
 ```
-https://doi.org/10.5281/zenodo.20162265
+https://doi.org/10.5281/zenodo.20187199
 ```
+
+(Previous version v1.1: `10.5281/zenodo.20162265`.)
 
 ---
 
