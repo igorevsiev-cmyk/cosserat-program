@@ -2,12 +2,14 @@
 """
 derrick_scan.py — Derrick test for the canonical electron configuration.
 
-Takes the canonical 3-parameter Hopf ansatz (R_r=0.5148, R_z=0.7552, w=0.6275)
-and rescales (R_r, R_z) by lambda for lambda in [0.6, 3.0]. For each lambda
-all four energy components E_OF, E_Sk, E_mass, E_u are evaluated on the
-canonical functional. If lambda=1.0 is the minimum, the canonical
-configuration is at Derrick balance; otherwise the curve shows in which
-direction the system would prefer to deform.
+Takes the canonical 3-parameter Hopf ansatz (R_r=0.51688, R_z=0.76148,
+w=0.62580) — the NM optimum of the bare Cosserat functional (m^2 = 0)
+from the companion `electron_mass_minimization/` artifact — and rescales
+(R_r, R_z) by lambda for lambda in [0.6, 3.0]. For each lambda the three
+energy components E_OF, E_Sk, E_u are evaluated on the bare functional.
+If lambda=1.0 is the minimum, the canonical configuration is at Derrick
+balance; otherwise the curve shows in which direction the system would
+prefer to deform.
 
 The parameter w (chirality) is NOT rescaled — it is a dimensionless angular
 parameter of the ansatz, not a length scale.
@@ -15,11 +17,10 @@ parameter of the ansatz, not a length scale.
 The empirical scaling laws under x -> lambda*x are:
     E_OF   ~ lambda^1     (quadratic gradients)
     E_Sk   ~ lambda^-1    (quartic Faddeev-Skyrme term)
-    E_mass ~ lambda^3     (volume integral with no gradients)
     E_u    ~ lambda^2     (Cosserat coupling with fixed screening length l_c)
 
 The Derrick identity dE/dlambda |_{lambda=1} = 0 becomes
-    E_OF - E_Sk + 3*E_mass + 2*E_u = 0
+    E_OF - E_Sk + 2*E_u = 0
 """
 
 import sys, os
@@ -76,16 +77,17 @@ class Cfg(Config):
     use_float64 = True; R_hopf = 1.0
     K1 = 2.0; K2 = 2.0; K3 = 14.56          # K3 = K1 * (1 + eta), eta = 2*pi
     c2 = 1.0; c4 = 1.0
-    m2 = 0.5                                  # mass anisotropy: eta / (4*pi)
+    m2 = 0.0                                  # no mass term in the bare functional
     n_frozen_r = 2; n_frozen_edge = 3
     beta_r = 6.0; beta_z = 3.0                # grid stretching strength
     cg_iter = 2000                            # PCG iteration cap for u-channel
 
 
-# Canonical 3-parameter Hopf ansatz (from companion-paper Nelder-Mead optimum)
-R_R_E = 0.5148
-R_Z_E = 0.7552
-W_E   = 0.6275
+# Canonical 3-parameter Hopf ansatz (NM optimum of the bare Cosserat
+# functional with m^2 = 0, see ../electron_mass_minimization/)
+R_R_E = 0.51688
+R_Z_E = 0.76148
+W_E   = 0.62580
 
 
 def hopf_variational(rr, zz, R_r, R_z, w):
@@ -112,7 +114,7 @@ def main():
     print("=" * 100)
     print(f"Device: {device}")
     print(f"Grid:   {cfg.Nr} x {cfg.Nz}")
-    print(f"K1={cfg.K1}, K2={cfg.K2}, K3={cfg.K3}, c4={cfg.c4}, m2={cfg.m2}")
+    print(f"K1={cfg.K1}, K2={cfg.K2}, K3={cfg.K3}, c4={cfg.c4}")
     print(f"mu_c = 2*pi = {MU_C:.6f}")
     print(f"Canonical ansatz: R_r={R_R_E}, R_z={R_Z_E}, w={W_E}")
     print()
@@ -127,11 +129,11 @@ def main():
     # Sample lambda values, denser near lambda=1
     lambdas = [0.6, 0.7, 0.8, 0.9, 0.95, 1.0, 1.05, 1.1, 1.2, 1.4, 1.6, 2.0, 2.5, 3.0]
 
-    print(f"{'lam':>5} {'E_OF':>8} {'E_Sk':>8} {'E_mass':>8} {'E_u':>8} "
-          f"{'E_tot':>8} {'m_e(keV)':>10} {'Q':>10} {'Derrick':>10}")
-    print(f"{'':5} {'keV':>8} {'keV':>8} {'keV':>8} {'keV':>8} "
-          f"{'keV':>8} {'':>10} {'':>10} {'dE/dlam':>10}")
-    print("-" * 105)
+    print(f"{'lam':>5} {'E_OF':>8} {'E_Sk':>8} {'E_u':>8} "
+          f"{'E_tot':>8} {'m_e_bare(keV)':>14} {'Q':>10} {'Derrick':>10}")
+    print(f"{'':5} {'keV':>8} {'keV':>8} {'keV':>8} "
+          f"{'keV':>8} {'':>14} {'':>10} {'dE/dlam':>10}")
+    print("-" * 95)
 
     results = []
     t_start = time.time()
@@ -142,32 +144,30 @@ def main():
 
         with torch.no_grad():
             n = hopf_variational(rr, zz, R_r_lam, R_z_lam, W_E)
-            E_phi_total, E_of, E_sk, E_mass = compute_energy_cosserat_stretched(n, metric, cfg)
+            E_phi_total, E_of, E_sk, _ = compute_energy_cosserat_stretched(n, metric, cfg)
             E_u = compute_E_u_screened(n, metric, MU_C, cg_iter=cfg.cg_iter).item()
             Q = compute_Q_stretched(n, metric).item()
 
         E_of_v = E_of.item() * M0C2_eV / 1000
         E_sk_v = E_sk.item() * M0C2_eV / 1000
-        E_mass_v = E_mass.item() * M0C2_eV / 1000
         E_u_v = E_u * M0C2_eV / 1000
-        E_tot_v = E_of_v + E_sk_v + E_mass_v + E_u_v
+        E_tot_v = E_of_v + E_sk_v + E_u_v
 
         # Derrick residual at the current lambda.
         # Under x -> lambda*x with fixed material constants:
         #   E_OF   ~ lambda    => dE_OF/dlam = E_OF / lam
         #   E_Sk   ~ 1/lambda  => dE_Sk/dlam = -E_Sk / lam
-        #   E_mass ~ lambda^3  => dE_mass/dlam = 3 * E_mass / lam
         #   E_u    ~ lambda^2  => dE_u/dlam = 2 * E_u / lam   (l_c fixed)
-        # so lambda * dE/dlam = E_OF - E_Sk + 3*E_mass + 2*E_u.
+        # so lambda * dE/dlam = E_OF - E_Sk + 2*E_u.
         # This residual should vanish at the Derrick minimum.
-        derrick = E_of_v - E_sk_v + 3 * E_mass_v + 2 * E_u_v
+        derrick = E_of_v - E_sk_v + 2 * E_u_v
 
-        print(f"{lam:>5.2f} {E_of_v:>8.2f} {E_sk_v:>8.2f} {E_mass_v:>8.2f} {E_u_v:>8.2f} "
-              f"{E_tot_v:>8.2f} {E_tot_v:>10.3f} {Q:>+10.6f} {derrick:>+10.2f}",
+        print(f"{lam:>5.2f} {E_of_v:>8.2f} {E_sk_v:>8.2f} {E_u_v:>8.2f} "
+              f"{E_tot_v:>8.2f} {E_tot_v:>14.3f} {Q:>+10.6f} {derrick:>+10.2f}",
               flush=True)
 
         results.append({
-            'lambda': lam, 'E_OF': E_of_v, 'E_Sk': E_sk_v, 'E_mass': E_mass_v,
+            'lambda': lam, 'E_OF': E_of_v, 'E_Sk': E_sk_v,
             'E_u': E_u_v, 'E_tot': E_tot_v, 'Q': Q, 'derrick': derrick,
         })
 
@@ -202,10 +202,10 @@ def main():
     csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                             'derrick_scan.csv')
     with open(csv_path, 'w') as f:
-        f.write("lambda,E_OF,E_Sk,E_mass,E_u,E_tot,Q,derrick\n")
+        f.write("lambda,E_OF,E_Sk,E_u,E_tot,Q,derrick\n")
         for r in results:
             f.write(f"{r['lambda']},{r['E_OF']:.4f},{r['E_Sk']:.4f},"
-                    f"{r['E_mass']:.4f},{r['E_u']:.4f},{r['E_tot']:.4f},"
+                    f"{r['E_u']:.4f},{r['E_tot']:.4f},"
                     f"{r['Q']:.6f},{r['derrick']:.4f}\n")
     print(f"\nCSV: {csv_path}")
     print(f"Total wall time: {time.time()-t_start:.0f}s")

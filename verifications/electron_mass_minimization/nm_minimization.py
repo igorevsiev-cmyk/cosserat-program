@@ -5,10 +5,14 @@ functional E[n, u] over the 3-parameter Hopf ansatz (R_r, R_z, w).
 
 Verifies the central numerical claim of the paper:
 
-    m_e c^2 = 511.033 keV from {epsilon_0, mu_0, hbar} on a 1024 x 2048 grid
+    m_e^bare c^2 = 507.997 keV from {epsilon_0, mu_0, hbar}
+    on a 1024 x 2048 grid
 
-with no fitted parameters: all six functional constants
-(K_1, K_2, K_3, mu_c, m^2, c_4) are fixed by the structural identities of
+(bare electron mass; physical m_e (CODATA) = 510.999 keV; the gap of
+3.002 keV is interpreted as standard QED renormalization, see paper §7.2)
+
+with no fitted parameters: all five functional constants
+(K_1, K_2, K_3, mu_c, c_4) are fixed by the structural identities of
 the preceding work (SI Reduction via the Cosserat-continuum hypothesis,
 DOI 10.5281/zenodo.20187199).
 
@@ -16,7 +20,7 @@ Method:
     Start from a generic simplex around (R_r, R_z, w) ~ (0.5, 0.7, 0.6),
     minimise E_total(R_r, R_z, w) by scipy.optimize.minimize with
     method='Nelder-Mead'. The objective is the full Cosserat energy
-    (Frank-Oseen + Skyrme + mass + screened Cosserat coupling); the
+    (Frank-Oseen + Skyrme + screened Cosserat coupling); the
     topological charge Q_H = -1 is enforced exactly by the ansatz.
 
 Output:
@@ -91,7 +95,7 @@ class Cfg(Config):
     K1 = 2.0; K2 = 2.0
     K3 = 14.56                         # = K1 * (1 + 2 pi)  rounded to 4 sig.fig.
     c2 = 1.0; c4 = 1.0
-    m2 = 0.5                           # = eta / (4 pi) = local anisotropy
+    m2 = 0.0                           # no mass term in the bare functional
     cg_iter = 2000                     # PCG cap for u-channel solver
 
 
@@ -123,12 +127,12 @@ def hopf_variational(rr, zz, R_r, R_z, w):
 def evaluate_energy(R_r, R_z, w, rr, zz, metric, cfg):
     """Evaluate full Cosserat energy E[n,u] of the Hopf ansatz, in keV.
 
-    Returns: dict with components {E_OF, E_Sk, E_mass, E_u, E_total} (keV)
+    Returns: dict with components {E_OF, E_Sk, E_u, E_total} (keV)
              and the topological charge Q.
     """
     with torch.no_grad():
         n = hopf_variational(rr, zz, R_r, R_z, w)
-        _, E_of, E_sk, E_mass = compute_energy_cosserat_stretched(n, metric, cfg)
+        _, E_of, E_sk, _ = compute_energy_cosserat_stretched(n, metric, cfg)
         E_u = compute_E_u_screened(n, metric, MU_C, cg_iter=cfg.cg_iter).item()
         Q = compute_Q_stretched(n, metric).item()
 
@@ -136,9 +140,8 @@ def evaluate_energy(R_r, R_z, w, rr, zz, metric, cfg):
     return {
         'E_OF':    E_of.item()   * keV,
         'E_Sk':    E_sk.item()   * keV,
-        'E_mass':  E_mass.item() * keV,
         'E_u':     E_u           * keV,
-        'E_total': (E_of.item() + E_sk.item() + E_mass.item() + E_u) * keV,
+        'E_total': (E_of.item() + E_sk.item() + E_u) * keV,
         'Q':       Q,
     }
 
@@ -156,7 +159,7 @@ def main():
     print(f"Device: {device}")
     print(f"Grid:   {cfg.Nr} x {cfg.Nz}  (L_r={cfg.L_r}, L_z={cfg.L_z}, "
           f"beta_r={cfg.beta_r}, beta_z={cfg.beta_z})")
-    print(f"K1={cfg.K1}, K2={cfg.K2}, K3={cfg.K3}, c4={cfg.c4}, m2={cfg.m2}")
+    print(f"K1={cfg.K1}, K2={cfg.K2}, K3={cfg.K3}, c4={cfg.c4}")
     print(f"mu_c = 2 pi = {MU_C:.6f}")
     print(f"M0 c^2 = {M0C2_eV:.4f} eV   (natural mass scale)")
     print()
@@ -232,17 +235,18 @@ def main():
     print(f"  E_OF    = {final['E_OF']:8.3f} keV   ({100*final['E_OF']/final['E_total']:5.1f} %)")
     print(f"  E_Sk    = {final['E_Sk']:8.3f} keV   ({100*final['E_Sk']/final['E_total']:5.1f} %)")
     print(f"  E_u     = {final['E_u']:8.3f} keV   ({100*final['E_u']/final['E_total']:5.1f} %)")
-    print(f"  E_mass  = {final['E_mass']:8.3f} keV   ({100*final['E_mass']/final['E_total']:5.1f} %)")
     print(f"  ----------------------------------")
-    print(f"  E_total = {final['E_total']:8.3f} keV   (100.0 %)")
+    print(f"  E_total = {final['E_total']:8.3f} keV   (100.0 %)   (= m_e^bare)")
     print()
     print(f"  Q = {final['Q']:+.6f}    (electron orientation if -1, positron if +1)")
     print()
     M_E_EXP_keV = 510.998950
+    gap_keV = M_E_EXP_keV - final['E_total']
     deviation_pct = 100.0 * (final['E_total'] - M_E_EXP_keV) / M_E_EXP_keV
-    print(f"  Predicted m_e c^2 = {final['E_total']:.4f} keV")
-    print(f"  CODATA 2018       = {M_E_EXP_keV:.4f} keV")
-    print(f"  Deviation         = {deviation_pct:+.4f} %")
+    print(f"  Predicted m_e^bare c^2 = {final['E_total']:.4f} keV")
+    print(f"  CODATA 2018 m_e c^2    = {M_E_EXP_keV:.4f} keV (physical/dressed)")
+    print(f"  Gap (CODATA - bare)    = {gap_keV:+.4f} keV  ({deviation_pct:+.4f} %)")
+    print(f"  Hypothesis: gap = standard QED renormalization (see paper §7.2)")
     print()
     print(f"  NM iterations:  {n_eval[0]}  (NM nfev = {result.nfev})")
     print(f"  Wall time:      {wall_time:.0f} s on {device}")
@@ -264,7 +268,6 @@ def main():
             'M0c2_eV':       M0C2_eV,
             'mu_c':          MU_C,
             'eta':           MU_C,
-            'm2':            cfg.m2,
             'K1':            cfg.K1,
             'K2':            cfg.K2,
             'K3':            cfg.K3,
@@ -298,7 +301,6 @@ def main():
             'E_OF':    final['E_OF'],
             'E_Sk':    final['E_Sk'],
             'E_u':     final['E_u'],
-            'E_mass':  final['E_mass'],
             'E_total': final['E_total'],
         },
         'topological_charge': {
@@ -307,10 +309,12 @@ def main():
             'deviation': abs(abs(final['Q']) - 1.0),
         },
         'comparison_with_CODATA_2018': {
-            'predicted_keV':   final['E_total'],
-            'codata_keV':      M_E_EXP_keV,
-            'deviation_pct':   deviation_pct,
-            'deviation_eV':    1000.0 * (final['E_total'] - M_E_EXP_keV),
+            'predicted_m_e_bare_keV': final['E_total'],
+            'codata_m_e_phys_keV':    M_E_EXP_keV,
+            'gap_keV':                gap_keV,
+            'gap_eV':                 1000.0 * gap_keV,
+            'gap_relative_pct':       -deviation_pct,
+            'interpretation':         'bare m_e from Cosserat functional; CODATA is the physical (renormalized) m_e; the gap is interpreted as standard QED renormalization (see paper §7.2)',
         },
     }
 

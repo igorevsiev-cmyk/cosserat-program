@@ -1,0 +1,70 @@
+{
+  "paper": "PAPER_ELECTRON_MASS (DOI: 10.5281/zenodo.20205502)",
+  "preceding_work": "10.5281/zenodo.20187199",
+  "physical_constants": {
+    "epsilon_0_F_per_m": 8.854187817e-12,
+    "mu_0_implicit_via_c": "c = 1/sqrt(eps0 mu0)",
+    "hbar_J_s": 1.054571817e-34,
+    "c_m_per_s": 299792458.0
+  },
+  "derived_constants": {
+    "M0c2_eV": 429.50679467240735,
+    "mu_c": 6.283185307179586,
+    "eta": 6.283185307179586,
+    "K1": 2.0,
+    "K2": 2.0,
+    "K3": 14.56,
+    "c4": 1.0
+  },
+  "grid": {
+    "Nr": 1024,
+    "Nz": 2048,
+    "L_r": 24.0,
+    "L_z": 48.0,
+    "beta_r": 6.0,
+    "beta_z": 3.0,
+    "r_focus": 1.0,
+    "z_focus": 0.0,
+    "precision": "float64"
+  },
+  "optimisation": {
+    "method": "Nelder-Mead",
+    "initial": [
+      0.5,
+      0.7,
+      0.6
+    ],
+    "xatol": 1e-06,
+    "fatol_keV": 0.0001,
+    "iterations": 161,
+    "nfev": 161,
+    "success": true,
+    "message": "Optimization terminated successfully.",
+    "wall_time_s": 248.79250526428223,
+    "device": "cuda"
+  },
+  "optimum": {
+    "R_r": 0.5168765652133356,
+    "R_z": 0.7614764679192181,
+    "w": 0.6258045117049007
+  },
+  "energy_decomposition_keV": {
+    "E_OF": 180.98488789199362,
+    "E_Sk": 276.9316247995738,
+    "E_u": 50.08004384441872,
+    "E_total": 507.9965565359862
+  },
+  "topological_charge": {
+    "Q": -0.9999912630233457,
+    "abs_Q": 0.9999912630233457,
+    "deviation": 8.736976654266648e-06
+  },
+  "comparison_with_CODATA_2018": {
+    "predicted_m_e_bare_keV": 507.9965565359862,
+    "codata_m_e_phys_keV": 510.99895,
+    "gap_keV": 3.002393464013778,
+    "gap_eV": 3002.393464013778,
+    "gap_relative_pct": 0.587553744291212,
+    "interpretation": "bare m_e from Cosserat functional; CODATA is the physical (renormalized) m_e; the gap is interpreted as standard QED renormalization (see paper \u00a77.2)"
+  }
+}

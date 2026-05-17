@@ -143,13 +143,29 @@ def create_stretched_grid(cfg, device, r_focus=None, z_focus=None,
 def _grad4_stretched_z(tensor, metric):
     """
     df/dz = (1/hz) * df/deta
-    4th order in eta with periodic BC.
+    4th order in eta with linear-extrapolation BC at z = ±L_z/2.
+
+    NOTE: previous version used periodic BC (torch.roll), which is wrong for
+    non-periodic fields. For Hopf solitons with z-odd-parity components, the
+    periodic wrap injects an artificial 2·|n_⊥| jump at the z-boundary; the
+    resulting fake FD derivative ~jump/dz makes E_bend diverge as O(1/h)
+    under grid refinement (each doubling adds ~2× the previous shift).
+    Linear extrapolation of ghost cells makes the BC consistent with smooth
+    decay and restores grid convergence (verified to <1 eV across Nz=2048..8192
+    for the canonical Hopf ansatz).
     """
     deta = metric.deta
-    fp2 = torch.roll(tensor, -2, dims=1)
-    fp1 = torch.roll(tensor, -1, dims=1)
-    fm1 = torch.roll(tensor,  1, dims=1)
-    fm2 = torch.roll(tensor,  2, dims=1)
+    # Linear-extrapolation ghost cells (z dim = dim 1)
+    pad_l_inner = 2 * tensor[:, 0:1]   - tensor[:, 1:2]      # at z_min - dz
+    pad_l_outer = 3 * tensor[:, 0:1]   - 2 * tensor[:, 1:2]  # at z_min - 2dz
+    pad_r_inner = 2 * tensor[:, -1:]   - tensor[:, -2:-1]    # at z_max + dz
+    pad_r_outer = 3 * tensor[:, -1:]   - 2 * tensor[:, -2:-1]  # at z_max + 2dz
+    padded = torch.cat([pad_l_outer, pad_l_inner, tensor,
+                        pad_r_inner, pad_r_outer], dim=1)
+    fp2 = padded[:, 4:]
+    fp1 = padded[:, 3:-1]
+    fm1 = padded[:, 1:-3]
+    fm2 = padded[:, :-4]
     df_deta = (-fp2 + 8*fp1 - 8*fm1 + fm2) / (12.0 * deta)
     return df_deta / metric.hz
 

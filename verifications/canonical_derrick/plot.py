@@ -25,7 +25,6 @@ def main():
     lam = [r['lambda'] for r in rows]
     e_of = [r['E_OF'] for r in rows]
     e_sk = [r['E_Sk'] for r in rows]
-    e_mass = [r['E_mass'] for r in rows]
     e_u = [r['E_u'] for r in rows]
     e_tot = [r['E_tot'] for r in rows]
 
@@ -44,7 +43,7 @@ def main():
                 label=f'min: $\\lambda={lam[idx_min]:.2f}$, '
                       f'$E={e_tot[idx_min]:.2f}$ keV')
     ax1.axhline(510.999, color='blue', linestyle=':', alpha=0.5,
-                label=r'$m_e^{\rm exp} = 510.999$ keV')
+                label=r'$m_e^{\rm phys}$ (CODATA) $= 510.999$ keV')
     ax1.set_xlabel(r'$\lambda$  (size scale of canonical Hopf ansatz)', fontsize=12)
     ax1.set_ylabel(r'$E_{\rm tot}$  (keV)', fontsize=12)
     ax1.set_title('Derrick scan: total energy vs. spatial dilation',
@@ -58,8 +57,6 @@ def main():
              color='tab:blue')
     ax2.plot(lam, e_sk, 's-', label=r'$E_{\rm Sk}$ (Skyrme, $\sim\lambda^{-1}$)',
              color='tab:orange')
-    ax2.plot(lam, e_mass, '^-', label=r'$E_{\rm mass}$ (anisotropy, $\sim\lambda^{3}$)',
-             color='tab:green')
     ax2.plot(lam, e_u, 'd-', label=r'$E_u$ (Cosserat, $\sim\lambda^{2}$)',
              color='tab:red')
     ax2.axvline(1.0, color='red', linestyle='--', alpha=0.3)

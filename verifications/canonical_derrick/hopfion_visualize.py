@@ -11,10 +11,11 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
 
-# Canonical electron parameters (from full-field NM optimization, 1024x2048)
-R_R = 0.5148
-R_Z = 0.7552
-W   = 0.6275
+# Canonical electron parameters (from NM optimization of the bare
+# Cosserat functional with m^2 = 0, see ../electron_mass_minimization/)
+R_R = 0.51688
+R_Z = 0.76148
+W   = 0.62580
 
 
 def hopf_field(rr, zz, R_r=R_R, R_z=R_Z, w=W):

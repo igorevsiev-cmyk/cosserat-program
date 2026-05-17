@@ -6,7 +6,7 @@ functional `E[n, u]` over the 3-parameter Hopf ansatz `(R_r, R_z, w)`,
 using only the three vacuum constants `{ε₀, μ₀, ℏ}` as input.
 
 This is the central numerical claim of the paper
-*Derivation of the electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional
+*Derivation of the bare electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional
 minimization* (DOI: [10.5281/zenodo.20205502](https://doi.org/10.5281/zenodo.20205502)).
 
 ## What is verified
@@ -15,34 +15,38 @@ The full Cosserat functional with parameters fixed by structure:
 
 ```
 K₁ = K₂ = 2,     K₃ = K₁·(1 + η) = 14.56,    η = 2π
-c₄ = 1,          m² = η/(4π) = 1/2,           μ_c = η = 2π
+c₄ = 1,                                       μ_c = η = 2π
 ```
 
 is minimised over the 3-parameter Hopf ansatz `(R_r, R_z, w)` by the
 Nelder–Mead simplex method on a `1024 × 2048` stretched cylindrical grid.
 
-The result reproduces
+The result reproduces the **bare** electron mass:
 
 ```
-m_e c² = 511.033 keV   (Δ = +0.007 % from CODATA 2018 = 510.998950 keV)
+m_e^bare c² = 507.997 keV
 ```
 
-with no fitted parameters.
+with no fitted parameters. The physical (CODATA) electron mass
+`m_e^phys c² = 510.998950 keV` differs from this by `+3.002 keV`, which is
+interpreted in the paper (§7.2) as the standard QED renormalization acting
+on both bare parameters of the program (`α_bare = 2⁻⁷ → α(0) = 1/137` and
+`m_e^bare → m_e^phys`). A direct derivation of the `δm_e` contribution is
+an open direction.
 
 ## Expected output (canonical)
 
 | Quantity              | Value                  | Source                |
 |-----------------------|------------------------|-----------------------|
-| `R_r`                 | 0.50945 (units of `l₀`) | NM optimum            |
-| `R_z`                 | 0.75010                 | NM optimum            |
-| `w`                   | 0.62585                 | NM optimum            |
-| `Q_H`                 | −0.999998               | Topological invariant |
-| `E_OF` (Frank–Oseen)  | 178.93 keV  (35.0 %)    | Energy decomposition  |
-| `E_Sk` (Skyrme)       | 281.03 keV  (55.0 %)    | Energy decomposition  |
-| `E_u` (Cosserat)      | 48.68 keV   ( 9.5 %)    | Energy decomposition  |
-| `E_mass` (anisotropy) | 2.40 keV    ( 0.5 %)    | Energy decomposition  |
-| **`E_total`**         | **511.03 keV**          | Predicted `m_e c²`    |
-| Deviation from CODATA | **+0.007 %** (= +34 eV) |                       |
+| `R_r`                 | 0.51688 (units of `l₀`) | NM optimum            |
+| `R_z`                 | 0.76148                 | NM optimum            |
+| `w`                   | 0.62580                 | NM optimum            |
+| `Q_H`                 | −0.99999                | Topological invariant |
+| `E_OF` (Frank–Oseen)  | 180.985 keV (35.6 %)    | Energy decomposition  |
+| `E_Sk` (Skyrme)       | 276.932 keV (54.5 %)    | Energy decomposition  |
+| `E_u` (Cosserat)      | 50.080 keV  ( 9.9 %)    | Energy decomposition  |
+| **`E_total`**         | **507.997 keV**         | Predicted `m_e^bare c²` |
+| Gap to CODATA         | **−3.002 keV** (`−0.587 %`) | Interpreted as QED renormalization (paper §7.2) |
 
 The Skyrme term carries the **largest** share of the energy (55 %), reflecting
 the standard Derrick balance for three-dimensional solitons (`E_OF ∝ λ`,
@@ -94,7 +98,7 @@ converges in ~ 100–200 simplex iterations.
 - Energy converted to keV via
 
       M₀c² = (2π · ℏ³ / (c⁵ · ε₀))^(1/4) · c² / e ≈ 429.51 eV
-      m_e  = E_total · M₀c² / 1000   [keV]
+      m_e^bare = E_total · M₀c² / 1000   [keV]
 
   All physical constants from CODATA 2018.
 
@@ -107,28 +111,23 @@ spatial dilation (i.e. stable against scale collapse or expansion).
 
 Together the two verifications close the logical loop:
 
-1. **Existence**: NM finds a minimum at `(R_r, R_z, w) ≈ (0.509, 0.750, 0.626)`
-   with `m_e ≈ 511.033 keV` (this folder).
+1. **Existence**: NM finds a minimum at `(R_r, R_z, w) ≈ (0.517, 0.761, 0.626)`
+   with `m_e^bare ≈ 507.997 keV` (this folder).
 2. **Stability**: that point is a true minimum under spatial dilation,
    not a saddle (`../canonical_derrick/`).
-
-A small numerical difference between the two folders is expected and
-documented:
-
-| Folder                           | Grid          | `m_e` predicted | Deviation from CODATA |
-|----------------------------------|---------------|-----------------|-----------------------|
-| `electron_mass_minimization`     | 1024 × 2048   | 511.033 keV     | +0.007 %              |
-| `canonical_derrick`              | 768 × 1536    | 510.93 keV      | +0.014 %              |
-
-Both are within the paper's claimed precision; the higher-resolution
-result is the one quoted in the paper.
 
 ## Scope of this verification
 
 This artifact verifies that the **3-parameter Hopf ansatz**, when minimised
-on the canonical functional, reproduces the experimental electron mass to
-`~ 10⁻⁴` precision with no fitted parameters. It does **not** verify that
-the 3-parameter ansatz captures the true global minimum of `E[n, u]` over
-the full director field `n: ℝ³ → S²` — higher-dimensional ansätze
-(5–8 parameters) yield slightly lower energies, with the deviation from
-CODATA decreasing accordingly (paper §7.1).
+on the canonical functional, reproduces the **bare** electron mass
+`m_e^bare = 507.997 keV` with no fitted parameters. The gap of `3.002 keV`
+to the physical (CODATA) value `m_e^phys = 510.999 keV` is interpreted as
+the standard QED renormalization (paper §7.2). The verification does not
+attempt to derive this gap from within the Cosserat program; that is left
+as an open direction.
+
+The 3-parameter ansatz also does not necessarily capture the true global
+minimum of `E[n, u]` over the full director field `n: ℝ³ → S²` — higher-
+dimensional ansätze (5–8 parameters) may yield slightly different bare
+values, but the bare/physical distinction discussed above is the leading
+effect (paper §7.1–7.2).

@@ -2,8 +2,8 @@
 
 This folder provides a self-contained numerical verification that the canonical
 Cosserat hopfion (the "electron configuration" in the paper) sits at a true
-Derrick minimum of the full energy functional E[n, u], with the gravitational
-channel (Cosserat coupling `μ_c`) included.
+**Derrick minimum** of the bare energy functional `E[n, u]`, with the
+gravitational channel (Cosserat coupling `μ_c`) included.
 
 ## What is verified
 
@@ -11,19 +11,19 @@ The paper claims the canonical configuration
 
 ```
 K₁ = K₂ = 2,     K₃ = 14.56 = K₁·(1 + η),      η = 2π
-c₄ = 1,          m² = 0.5 = η/(4π),             μ_c = 2π
-3-param Hopf ansatz:  R_r = 0.5148,  R_z = 0.7552,  w = 0.6275
+c₄ = 1,                                          μ_c = 2π
+3-param Hopf ansatz:  R_r = 0.51688,  R_z = 0.76148,  w = 0.62580
 ```
 
 is the energy minimum on the Hopf submanifold and gives
 
 ```
-m_e = E_total · M₀c² = 510.93 keV          (vs experiment 510.999 keV, Δ = 0.014%)
+m_e^bare = E_total · M₀c² = 507.995 keV          (bare electron mass)
 ```
 
 The Derrick scan checks **stability under spatial dilation**: scale
 `(R_r, R_z) → λ·(R_r, R_z)` for `λ ∈ [0.6, 3.0]` and evaluate every term
-of the full functional at each `λ`. A true minimum at `λ = 1` requires
+of the bare functional at each `λ`. A true minimum at `λ = 1` requires
 the V-shape with the canonical point at the bottom; a false minimum
 (or an open functional that decays to vacuum) would show a monotone
 trend instead.
@@ -32,45 +32,60 @@ trend instead.
 
 ![Derrick scan](derrick_scan.png)
 
-| λ | E_OF | E_Sk | E_mass | E_u | E_tot (keV) |
-|---|------|------|--------|-----|-------------|
-| 0.6  | 108.53 | 463.30 | 0.54  | 18.45  | 590.82 |
-| 0.8  | 144.56 | 347.49 | 1.28  | 32.29  | 525.62 |
-| 0.95 | 171.58 | 292.63 | 2.13  | 45.11  | 511.45 |
-| **1.00** | **180.60** | **278.00** | **2.48** | **49.85** | **510.93** ← min |
-| 1.05 | 189.62 | 264.76 | 2.87  | 54.82  | 512.07 |
-| 1.10 | 198.65 | 252.73 | 3.29  | 60.02  | 514.69 |
-| 1.20 | 216.73 | 231.67 | 4.27  | 71.13  | 523.80 |
-| 1.60 | 289.65 | 173.75 | 10.01 | 125.08 | 598.50 |
-| 2.00 | 364.25 | 139.00 | 19.37 | 194.71 | 717.33 |
-| 3.00 | 566.42 | 92.67  | 63.78 | 442.11 | 1164.98 |
+| λ    | E_OF (keV) | E_Sk (keV) | E_u (keV) | E_tot (keV) | Q          | Derrick |
+|------|------------|------------|-----------|-------------|------------|---------|
+| 0.60 | 108.97     | 461.52     | 18.54     | 589.03      | −0.999977  | −315.48 |
+| 0.70 | 127.02     | 395.60     | 25.02     | 547.65      | −0.999986  | −218.54 |
+| 0.80 | 145.04     | 346.16     | 32.44     | 523.64      | −0.999989  | −136.23 |
+| 0.90 | 163.03     | 307.70     | 40.80     | 511.52      | −0.999990  |  −63.08 |
+| 0.95 | 172.01     | 291.50     | 45.32     | 508.84      | −0.999990  |  −28.85 |
+| **1.00** | **180.99** | **276.93** | **50.08** | **507.99** ← min | **−0.999989** | **+4.22** |
+| 1.05 | 189.95     | 263.74     | 55.07     | 508.77      | −0.999989  |  +36.35 |
+| 1.10 | 198.91     | 251.76     | 60.30     | 510.97      | −0.999988  |  +67.76 |
+| 1.20 | 216.80     | 230.78     | 71.46     | 519.04      | −0.999985  | +128.95 |
+| 1.40 | 252.50     | 197.81     | 96.64     | 546.94      | −0.999978  | +247.96 |
+| 1.60 | 288.07     | 173.08     | 125.67    | 586.82      | −0.999967  | +366.33 |
+| 2.00 | 358.82     | 138.47     | 195.65    | 692.93      | −0.999936  | +611.65 |
+| 2.50 | 446.55     | 110.77     | 306.39    | 863.71      | −0.999876  | +948.55 |
+| 3.00 | 533.48     |  92.31     | 444.45    | 1070.23     | −0.999785  | +1330.06 |
 
-Full data: `derrick_scan.csv` (14 points). Topological charge `Q = -1`
-preserved across the entire range (|Q + 1| < 5·10⁻⁵).
+Full data: `derrick_scan.csv`. Topological charge `Q ≈ −1` preserved across
+the entire range (`|Q + 1| < 2.2·10⁻⁴` even at extreme λ = 3.0).
+
+**Outcome.** `λ = 1.00` is the discrete minimum (V-shape confirmed),
+delta from neighbours: −0.84 keV vs `λ = 0.95` and −0.77 keV vs `λ = 1.05`.
+The Derrick residual at `λ = 1.0` is `+4.22 keV` (`<1 %` of `E_tot`),
+which would vanish in the continuum limit; the small positive sign means
+the exact balance point sits at `λ ≈ 0.99`, inside the discrete sampling
+gap. The canonical 3-parameter ansatz is therefore at Derrick balance to
+the resolution of the scan.
 
 ### Empirical Derrick scalings
 
-The four components follow the expected scaling laws under `x → λx`:
+The three energy components follow the expected scaling laws under `x → λx`:
 
 | component | scaling | reason |
 |-----------|---------|--------|
 | `E_OF`    | `λ¹`    | quadratic gradients of `n`            |
 | `E_Sk`    | `λ⁻¹`   | quartic Faddeev–Skyrme term           |
-| `E_mass`  | `λ³`    | volume integral with no gradients     |
 | `E_u`     | `λ²`    | Cosserat coupling with **fixed** screening length `l_c = 1/√μ_c` (not co-scaled with the hopfion) |
 
 The `E_u ~ λ²` (not `λ`) is the signature of the gravitational channel:
-`μ_c` is a fixed material constant, so the cosserat screening length is
+`μ_c` is a fixed material constant, so the Cosserat screening length is
 absolute and the integral picks up an extra factor of `λ`.
 
 The Derrick equation `dE/dλ |_{λ=1} = 0` becomes
 
 ```
-E_OF − E_Sk + 3·E_mass + 2·E_u = 0
+E_OF − E_Sk + 2·E_u = 0
 ```
 
-Plugging in: `180.6 − 278.0 + 3·2.48 + 2·49.85 = +9.7 keV ≈ 0` (numerically
-the minimum is between λ = 0.98 and λ = 1.00, within the discrete sampling).
+Plug in the canonical numbers (`λ = 1.00` row):
+`180.99 − 276.93 + 2·50.08 = +4.22 keV`, which equals the printed Derrick
+column. The residual is `<1 %` of the total energy and is consistent with
+discrete sampling on a `768 × 1536` grid; the true minimum sits at
+`λ ≈ 1.00 − 4.22/(d²E/dλ²)`, well inside the gap between λ = 0.95 and 1.00
+in the scan.
 
 ## How to reproduce
 
@@ -83,9 +98,15 @@ python derrick_scan.py
 
 # regenerate plot from CSV
 python plot.py
+
+# (optional) regenerate the hopfion visualization
+python hopfion_visualize.py
 ```
 
 Output: `derrick_scan.csv` (numerics) and `derrick_scan.png` (figure above).
+The `hopfion_visualize.py` script generates `hopfion_visualize.png`
+(four-panel visualization of the canonical Hopf field; pure
+`numpy + matplotlib`, no PyTorch required).
 
 ## Files
 
@@ -95,7 +116,10 @@ Output: `derrick_scan.csv` (numerics) and `derrick_scan.png` (figure above).
   Cosserat energy (`compute_energy_cosserat_stretched`), topological charge
   (`compute_Q_stretched`), and the screened Cosserat solver
   (`compute_E_u_screened` — preconditioned conjugate gradient for the
-  `u`-channel at finite `μ_c`)
+  `u`-channel at finite `μ_c`).  Uses **linear-extrapolation ghost cells
+  in z** (not periodic) — periodic BC was the source of a previously
+  observed bend-term divergence under grid refinement, fixed in
+  the 2026-05-16 diagnostic session.
 - `plot.py` — regenerates the Derrick-scan figure from `derrick_scan.csv`
   (matplotlib only)
 - `hopfion_visualize.py` — approximate visualization of the canonical Hopf
@@ -121,16 +145,40 @@ Output: `derrick_scan.csv` (numerics) and `derrick_scan.png` (figure above).
   conversion to keV uses
 
       M₀c² = (2π · ℏ³ / (c⁵ · ε₀))^(1/4) · c² / e ≈ 429.51 eV
-      m_e = E_total · M₀c² / 1000  [keV]
+      m_e^bare = E_total · M₀c² / 1000   [keV]
 
   All physical constants from CODATA 2018 (see top of `derrick_scan.py`).
+
+## Relation to the NM verification
+
+This script verifies that the canonical configuration is a **Derrick minimum**.
+The companion verification at [`../electron_mass_minimization/`](../electron_mass_minimization/)
+verifies that the same configuration is the **Nelder–Mead optimum** of the
+full 3-parameter Hopf ansatz space.
+
+Together the two verifications close the logical loop:
+
+1. **Existence**: NM finds a minimum at `(R_r, R_z, w) ≈ (0.517, 0.761, 0.626)`
+   with `m_e^bare ≈ 507.997 keV` (`../electron_mass_minimization/`).
+2. **Stability**: that point is a true minimum under spatial dilation,
+   not a saddle (this folder).
+
+The small numerical difference between the two folders (~2 eV in `m_e^bare`)
+is consistent with the grid-resolution difference (`1024 × 2048` here,
+`768 × 1536` for the Derrick scan).
 
 ## Scope of this verification
 
 This artifact verifies the **Derrick balance** of the canonical point: a
-true minimum under spatial dilation, with all four energy channels
+true minimum under spatial dilation, with all three energy channels
 properly scaling. It does **not** independently reconstruct the canonical
-parameters `(R_r, R_z, w)` — those come from a Nelder–Mead optimization
-in the companion code (see paper §7.3). The Derrick scan here closes
-the loop: given the canonical parameters, the canonical functional has
-its minimum at exactly that point.
+parameters `(R_r, R_z, w)` — those come from the Nelder–Mead optimization
+in the companion artifact (`../electron_mass_minimization/`). The Derrick
+scan here closes the loop: given the canonical parameters, the bare
+functional has its minimum at exactly that point.
+
+The verification reproduces `m_e^bare = 507.995 keV` (the bare electron
+mass in the Cosserat vacuum). The physical (CODATA) value
+`m_e^phys = 510.999 keV` differs by `3.004 keV`, which is interpreted in
+the paper (§7.2) as the standard QED renormalization. A direct derivation
+of the `δm_e` contribution is an open direction.
