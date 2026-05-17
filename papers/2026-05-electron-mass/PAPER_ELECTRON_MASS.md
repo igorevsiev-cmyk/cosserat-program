@@ -129,9 +129,7 @@ E_u[u] = ∫ d³r [ (μ/2) (∂u)² + (μ_c/2) u² ]                            
 E_int[n, u] = − ∫ d³r [ 2·f(n) · u ],     f(n) = atan2(√(n₁²+n₂²), n_z)  (2.4)
 ```
 
-Here `n_∞ = ẑ` is the boundary value at infinity; `f(n)` is the polar angle of the director from the vacuum direction (0 at infinity, π at the knot core); `μ` is the elastic modulus (in natural units `μ = 1`); `μ_c` is the Cosserat coupling, playing the role of a Yukawa mass for the u-channel (see §5.5).
-
-**Remark on the role of E_u.** Unlike the standard "compact" form of the Cosserat coupling `(μ_c/2)|∇n|²(1−n·n_∞)²` (which arises phenomenologically under the assumption of a local identity `u ≡ Ω(n)`), the representation (2.1)–(2.4) separates the channels explicitly: `n` lives on `S²` and carries the topology `Q_H`; `u` lives on `ℝ³`, possesses no topology of its own, and adjusts to `n` through the solution of `δE/δu = 0`. The numerical implementation operates with exactly this form (see §5.5), which is important for the correct behavior in the limits `μ_c → 0` and `μ_c → ∞`.
+Here `n_∞ = ẑ` is the boundary value at infinity; `f(n)` is the polar angle of the director from the vacuum direction (0 at infinity, π at the knot core); `μ` is the elastic modulus (in natural units `μ = 1`).
 
 
 ---
