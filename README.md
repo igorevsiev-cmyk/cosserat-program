@@ -16,7 +16,7 @@ This repository hosts the preprints, supplementary data, and code accompanying t
 | # | Topic | Folder | Status |
 |---|---|---|---|
 | 1 | **SI reduction & fine-structure constant** | [`papers/2026-05-SI-reduction/`](papers/2026-05-SI-reduction/) | preprint v2 |
-| 2 | **Electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional minimization** | [`papers/2026-05-electron-mass/`](papers/2026-05-electron-mass/) | preprint v1 |
+| 2 | **Bare electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional minimization** | [`papers/2026-05-electron-mass/`](papers/2026-05-electron-mass/) | preprint |
 
 Forthcoming papers in the same series (in preparation, will appear here as they are released):
 
@@ -28,8 +28,8 @@ Forthcoming papers in the same series (in preparation, will appear here as they 
 
 ## Supplementary verifications
 
-- [`verifications/canonical_derrick/`](verifications/canonical_derrick/) — independent Derrick scan of the full canonical functional (§7.3 of paper 1): confirms that the canonical Hopf configuration is a true minimum under spatial dilation, with `m_e = 510.93 keV` (Δ = 0.014 % from experiment, on a 768 × 1536 grid) and topology preserved across the scan.
-- [`verifications/electron_mass_minimization/`](verifications/electron_mass_minimization/) — independent Nelder–Mead minimization (§5 of paper 2): reproduces the canonical Hopf optimum on a `1024 × 2048` grid from a generic initial guess, yielding `m_e = 511.033 keV` (Δ = 0.007 % from experiment) with no fitted parameters.
+- [`verifications/canonical_derrick/`](verifications/canonical_derrick/) — independent Derrick scan of the full canonical functional (§7.3 of paper 1): confirms that the canonical Hopf configuration is a true minimum under spatial dilation, with the bare electron mass `m_e^bare = 446.279 keV` (dyadic box `17 × 33 l₀`, `1024 × 2048` grid) and topology preserved across the scan.
+- [`verifications/electron_mass_minimization/`](verifications/electron_mass_minimization/) — independent Nelder–Mead minimization (§5 of paper 2): reproduces the canonical Hopf optimum on a `1024 × 2048` grid (dyadic box `17 × 33`) from a generic initial guess, yielding the bare electron mass `m_e^bare = 446.279 keV` with no fitted parameters.
 
 ## Status
 

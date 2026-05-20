@@ -12,10 +12,11 @@ from matplotlib.colors import LinearSegmentedColormap
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
 
 # Canonical electron parameters (from NM optimization of the bare
-# Cosserat functional with m^2 = 0, see ../electron_mass_minimization/)
-R_R = 0.51688
-R_Z = 0.76148
-W   = 0.62580
+# Cosserat functional with m^2 = 0 on the dyadic box L = 17 x 33,
+# see ../electron_mass_minimization/)
+R_R = 0.64082
+R_Z = 0.80729
+W   = 0.70200
 
 
 def hopf_field(rr, zz, R_r=R_R, R_z=R_Z, w=W):

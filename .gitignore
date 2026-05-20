@@ -44,3 +44,6 @@ Thumbs.db
 NOTES_*.md
 DRAFT_*.md
 TODO*.md
+
+verifications/grid_diagnostics/
+verifications/hyperbola_II_test/

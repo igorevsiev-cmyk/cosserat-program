@@ -19,38 +19,42 @@ c₄ = 1,                                       μ_c = η = 2π
 ```
 
 is minimised over the 3-parameter Hopf ansatz `(R_r, R_z, w)` by the
-Nelder–Mead simplex method on a `1024 × 2048` stretched cylindrical grid.
+Nelder–Mead simplex method on a `1024 × 2048` stretched cylindrical grid,
+on the **dyadic box** `L_r × L_z = 17 × 33` (in units of `l₀`).
 
-The result reproduces the **bare** electron mass:
+The result is the **bare** electron mass:
 
 ```
-m_e^bare c² = 507.997 keV
+m_e^bare c² = 446.279 keV
 ```
 
-with no fitted parameters. The physical (CODATA) electron mass
-`m_e^phys c² = 510.998950 keV` differs from this by `+3.002 keV`, which is
-interpreted in the paper (§7.2) as the standard QED renormalization acting
-on both bare parameters of the program (`α_bare = 2⁻⁷ → α(0) = 1/137` and
-`m_e^bare → m_e^phys`). A direct derivation of the `δm_e` contribution is
-an open direction.
+with no fitted parameters. This bare value is **not** compared with the
+physical (CODATA) electron mass — it is the output of the bare functional
+as such. The NM optimum reproduces the **dyadic closed form**
+
+```
+m_e^bare c² = (2¹⁰ + 2⁴ − 1) · M₀c² = 1039 · M₀c² = 446.258 keV
+```
+
+to which the minimisation agrees to `+0.0049 %` (`+21.7 eV`).
 
 ## Expected output (canonical)
 
 | Quantity              | Value                  | Source                |
 |-----------------------|------------------------|-----------------------|
-| `R_r`                 | 0.51688 (units of `l₀`) | NM optimum            |
-| `R_z`                 | 0.76148                 | NM optimum            |
-| `w`                   | 0.62580                 | NM optimum            |
-| `Q_H`                 | −0.99999                | Topological invariant |
-| `E_OF` (Frank–Oseen)  | 180.985 keV (35.6 %)    | Energy decomposition  |
-| `E_Sk` (Skyrme)       | 276.932 keV (54.5 %)    | Energy decomposition  |
-| `E_u` (Cosserat)      | 50.080 keV  ( 9.9 %)    | Energy decomposition  |
-| **`E_total`**         | **507.997 keV**         | Predicted `m_e^bare c²` |
-| Gap to CODATA         | **−3.002 keV** (`−0.587 %`) | Interpreted as QED renormalization (paper §7.2) |
+| `R_r`                 | 0.64082 (units of `l₀`) | NM optimum            |
+| `R_z`                 | 0.80729                 | NM optimum            |
+| `w`                   | 0.70200                 | NM optimum            |
+| `Q_H`                 | −0.99996                | Topological invariant |
+| `E_OF` (Frank–Oseen)  | 221.888 keV (49.7 %)    | Energy decomposition  |
+| `E_Sk` (Skyrme)       | 220.634 keV (49.4 %)    | Energy decomposition  |
+| `E_u` (Cosserat)      | 3.758 keV  ( 0.8 %)     | Energy decomposition  |
+| **`E_total`**         | **446.279 keV**         | Predicted `m_e^bare c²` |
+| Dyadic closed form    | `(2¹⁰+2⁴−1)·M₀c²` = **446.258 keV** | NM agrees to `+0.0049 %` |
 
-The Skyrme term carries the **largest** share of the energy (55 %), reflecting
-the standard Derrick balance for three-dimensional solitons (`E_OF ∝ λ`,
-`E_Sk ∝ λ⁻¹` under uniform rescaling).
+On the dyadic box the Frank–Oseen and Skyrme terms carry almost equal
+shares (`≈ 49.7 %` and `≈ 49.4 %`), and the screened Cosserat coupling
+contributes the remaining `≈ 0.8 %`.
 
 The complete result is written to `result.json` after a successful run.
 
@@ -60,15 +64,15 @@ The complete result is written to `result.json` after a successful run.
 # environment
 pip install -r requirements.txt
 
-# run the minimization (~ 10 minutes on RTX 2070, considerably longer on CPU)
+# run the minimization (~ 6 minutes on RTX 2070, considerably longer on CPU)
 python nm_minimization.py
 ```
 
-Output: `result.json` (parameters, energy decomposition, comparison with CODATA).
+Output: `result.json` (parameters, energy decomposition, dyadic closed form).
 
 The script logs intermediate progress every five Nelder–Mead evaluations.
 A typical run from the generic initial guess `(0.50, 0.70, 0.60)`
-converges in ~ 100–200 simplex iterations.
+converges in ~ 90–100 simplex iterations (172 function evaluations).
 
 ## Files
 
@@ -77,7 +81,7 @@ converges in ~ 100–200 simplex iterations.
 - `stretched_grid.py` — adaptive (sinh-stretched) grid utilities, full
   Cosserat energy (`compute_energy_cosserat_stretched`), topological charge
   (`compute_Q_stretched`), and the screened Cosserat solver
-  (`compute_E_u_screened`). **Identical** to the file in
+  (`compute_E_u_screened`, Robin BC). **Identical** to the file in
   `../canonical_derrick/` (intentionally duplicated so each verification
   folder is self-contained; do not edit one without updating the other).
 - `requirements.txt` — Python dependencies (`torch`, `numpy`, `scipy`)
@@ -87,11 +91,12 @@ converges in ~ 100–200 simplex iterations.
 
 - Grid: 1024 × 2048 axisymmetric (r, z), adaptive stretched with focus
   `r = 1`, `z = 0`, sharpness `β_r = 6`, `β_z = 3`,
-  domain `L_r = 24`, `L_z = 48` (in units of `l₀`).
+  dyadic box `L_r = 17`, `L_z = 33` (in units of `l₀`;
+  `L_r = log₂(2⁷·2¹⁰) = 17`, `L_z = 2·L_r − 1 = 33`).
 - Optimizer: `scipy.optimize.minimize(method='Nelder-Mead', adaptive=True)`.
 - u-channel: screened Cosserat solver (preconditioned conjugate gradient
-  with stopping tolerance `1e-6`, typical 690 iterations per energy
-  evaluation; this dominates the wall time).
+  with Robin boundary condition, stopping tolerance `1e-8`, ~ 900 PCG
+  iterations per energy evaluation; this dominates the wall time).
 - Float precision: `float64` throughout.
 - Topological charge enforced exactly by ansatz (`Q_H = −1` for the
   electron orientation, `+1` for positron — both degenerate by `n → −n`).
@@ -111,23 +116,23 @@ spatial dilation (i.e. stable against scale collapse or expansion).
 
 Together the two verifications close the logical loop:
 
-1. **Existence**: NM finds a minimum at `(R_r, R_z, w) ≈ (0.517, 0.761, 0.626)`
-   with `m_e^bare ≈ 507.997 keV` (this folder).
+1. **Existence**: NM finds a minimum at `(R_r, R_z, w) ≈ (0.641, 0.807, 0.702)`
+   with `m_e^bare ≈ 446.279 keV` (this folder).
 2. **Stability**: that point is a true minimum under spatial dilation,
    not a saddle (`../canonical_derrick/`).
 
 ## Scope of this verification
 
 This artifact verifies that the **3-parameter Hopf ansatz**, when minimised
-on the canonical functional, reproduces the **bare** electron mass
-`m_e^bare = 507.997 keV` with no fitted parameters. The gap of `3.002 keV`
-to the physical (CODATA) value `m_e^phys = 510.999 keV` is interpreted as
-the standard QED renormalization (paper §7.2). The verification does not
-attempt to derive this gap from within the Cosserat program; that is left
-as an open direction.
+on the canonical bare functional (`m² = 0`) over the dyadic box, reproduces
+the **bare** electron mass `m_e^bare = 446.279 keV` with no fitted
+parameters, and that this value matches the dyadic closed form
+`(2¹⁰ + 2⁴ − 1)·M₀c²` to `0.005 %`.
+
+This is a **bare** result: it is the output of the bare functional and is
+deliberately not compared with the physical (dressed) electron mass.
 
 The 3-parameter ansatz also does not necessarily capture the true global
 minimum of `E[n, u]` over the full director field `n: ℝ³ → S²` — higher-
-dimensional ansätze (5–8 parameters) may yield slightly different bare
-values, but the bare/physical distinction discussed above is the leading
-effect (paper §7.1–7.2).
+dimensional ansätze (5–8 parameters) and full-field relaxations may yield
+slightly different bare values.

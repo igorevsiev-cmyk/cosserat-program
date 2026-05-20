@@ -20,7 +20,7 @@ The framework rests on four identifications between parameters of the medium and
 
 Already from P1 and P2 the mechanical expression `c_T = √(G_shear/ρ)` for the transverse Cosserat wave speed, after substitution, coincides with **Maxwell's formula** for the speed of electromagnetic waves: `c_T = 1/√(ε₀μ₀) ≡ c_light`. This is the same classical identity that Maxwell obtained from his elastic-aether model in 1861–62 (and that in SI 2019 is fixed by the definition of `c`); here it arises as a **direct mechanical consequence** of the Cosserat identifications, without any additional parameters. The coincidence `c_T = c_light` is therefore not a prediction of the program but its **necessary boundary condition**: any model in which P1 and P2 take this form must recover Maxwell's `c`. From there everything unfolds on its own: the ampere becomes a deformation circulation with dimension `[m²/s]`, the coulomb becomes the cross-sectional area of a defect `[m²]`, and the whole base `{m, kg, s, A}` reduces to a single dimension — length (or, equivalently, energy). The gravitational constant acquires the structural form `G = c⁴ε₀/(16π l_G²)`, where `l_G ≈ 4.62 × 10¹⁵ m` is the characteristic scale of the `u`-channel; the famous Planck length turns out **not** to be fundamental but derived: `l_P = l₀²/(2√2 · l_G)`.
 
-**Local minima of the functional and identification with particles.** In the same structure (P1–P4 plus the geometry of an `S²`-target director field) the functional `E[n, u]` admits stable localized minima with integer topological charge `Q_H ∈ π₃(S²) = ℤ` — a consequence of the medium itself, not an extra postulate. Empirically the minimum with `Q_H = -1` is identified with the electron (the one with `Q_H = +1` with the positron); direct numerical relaxation yields the **bare** (UV) mass `m_e^bare = 507.997 keV` [10]; the gap `3.002 keV ≈ 7·M₀c²` to the physical `m_e (CODATA) = 510.999 keV` is interpreted in [10] §7.2 as the standard QED renormalization, in parallel with the shift `α_bare = 1/128 → α(0) = 1/137`. In this sense the program contains no "separate predictions" stacked on top of the postulates: there is one cascade of consequences from the structure of the medium, and the existence of particles as topological knots of the field is one of its links — on a par with `c = c_light`, the dimensional reduction, and the value of `α`.
+**Local minima of the functional and identification with particles.** In the same structure (P1–P4 plus the geometry of an `S²`-target director field) the functional `E[n, u]` admits stable localized minima with integer topological charge `Q_H ∈ π₃(S²) = ℤ` — a consequence of the medium itself, not an extra postulate. Empirically the minimum with `Q_H = -1` is identified with the electron (the one with `Q_H = +1` with the positron); direct numerical minimization yields the **bare** mass `m_e^bare = 446.279 keV` [10] (on the dyadic box `L = 17 × 33 l₀`). In [10] §7 the dimensionless minimum `Ẽ_min ≈ 1039` fits the dyadic form `m_e/m₀ = x² + x/2 − 1` with `x = α⁻¹/4`, and the same shift of the scale that takes `α_bare = 1/128 → α(0) = 1/137` takes the bare mass to the physical `m_e ≈ 511 keV`. In this sense the program contains no "separate predictions" stacked on top of the postulates: there is one cascade of consequences from the structure of the medium, and the existence of particles as topological knots of the field is one of its links — on a par with `c = c_light`, the dimensional reduction, and the value of `α`.
 
 Combined with the dimensional reduction `[Q] ↔ [m²]`, this yields a direct numerical consequence. The cross-section of a hopfionic defect under the Derrick-stability condition is a disc of radius `r_v = l₀/2` (§7.3); the charge is then the area of that disc, `e = π(l₀/2)²`. Substituting into the textbook definition `α = e²/(4πε₀ℏc)`, after cancellations one obtains
 
@@ -30,7 +30,7 @@ Combined with the dimensional reduction `[Q] ↔ [m²]`, this yields a direct nu
 
 The bottom line: the canonical set of fundamental constants of nature reduces to `{ε₀, μ₀, ℏ, G}`; everything else is computable. Operationally this is equivalent to the standard natural units `ℏ = c = G = 1`, but the justification is different — not "convenience of notation" but a structural removal of redundancy from SI. The linearized Cosserat metric reproduces all five classical tests of GR (perihelion precession of Mercury, deflection of light by the Sun, Shapiro delay, gravitational redshift, gravitational waves travelling at `c`); the differences from pure GR are torsion at Planckian densities (Einstein–Cartan) and a massive Cosserat mode at the scale `l_K ≈ 202 nm`. Both features are falsifiable.
 
-**Status and scope of the claims.** This is not a proposal to redefine the SI: the SI base units remain as defined by CGPM in 2019. The claim is only that, conditional on the postulates P1–P4, there is a one-to-one mapping between the SI quantities and the mechanical dimensions of a Cosserat continuum. The reduction itself is a preparatory construction for subsequent papers in which, from `{ε₀, μ₀, ℏ}` via minimization of the Cosserat functional, the **bare** electron mass `m_e^bare = 507.997 keV` is obtained (precision limited only by the grid resolution, ~`2·10⁻⁶` of `m_e`); the gap `3.002 keV ≈ 7·M₀c²` to the physical `m_e (CODATA) = 510.999 keV` is interpreted as the standard QED renormalization ([10] §7.2). With no free parameters.
+**Status and scope of the claims.** This is not a proposal to redefine the SI: the SI base units remain as defined by CGPM in 2019. The claim is only that, conditional on the postulates P1–P4, there is a one-to-one mapping between the SI quantities and the mechanical dimensions of a Cosserat continuum. The reduction itself is a preparatory construction for subsequent papers in which, from `{ε₀, μ₀, ℏ}` via minimization of the Cosserat functional, the **bare** electron mass `m_e^bare = 446.279 keV` is obtained (on the dyadic box `17 × 33 l₀`, with no free parameters); its connection to the physical mass via the running of `α` is treated in [10] §7.
 
 **Keywords:** Cosserat continuum, electromagnetic units, dimensional analysis, mechanical interpretation, natural units, structural reduction, micropolar elasticity, Kleinert gauge theory, defect-induced gravity, Einstein–Cartan theory.
 
@@ -72,7 +72,7 @@ CONSEQUENCE IV — fine-structure constant (§7)
  ▼
 INTERLOCKING of the two hyperbolas (I + II) — §7.9, §8.3
  m₀² · e = (π/4)·(ℏ/c)²        (T13)
- m_e/m₀ = 2¹⁰ = 1/(16α²)        (α²-scaling; bare: exactly 2¹⁰)
+ m_e/m₀ = 2¹⁰+2⁴−1 = 1039      (bare; leading term 1/(16α²) = 2¹⁰)
  │
  ▼
 CONSEQUENCE V — gravitational channel (§8)
@@ -563,7 +563,7 @@ In the program **two** lengths play fundamentally different roles, and it is imp
 
 - **`λ_C = ℏ/(m_e c) ≈ 3.86 × 10⁻¹³ m`** — the minimal length of localization of the **electron knot**. The topology `Q_H = -1` requires the knot to be tied at this scale **regardless** of the external medium. **It is a property of the particle (a topological invariant), not of the medium.**
 
-The ratio `l₀/λ_C ≈ 1188` for the vacuum medium.
+The ratio `l₀/λ_C ≈ 1190` for the vacuum medium.
 
 #### The knot is pure topology; "mass" is the distribution of energy across cells of the medium
 
@@ -572,13 +572,13 @@ In the Cosserat picture the electron is a **topological defect** of the field `n
 **What is fixed at the moment of creating the knot:**
 
 - The **topological charge** `Q_H = -1` — an integer invariant, independent of the medium.
-- The **energy of the knot** `m_e c² ≈ 511 keV` (CODATA, physical value; the bare value is `m_e^bare = 507.997 keV`, see [10] §7.2) — set at its creation on the Compton scale through energy conservation. The Compton length `λ_C = ℏ/(m_e c)` is the topological limit of localization: the knot does not exist on smaller scales (the mass of one cell of the medium would exceed the energy of the knot).
+- The **energy of the knot** `m_e c² ≈ 511 keV` (CODATA, physical value; the bare value is `m_e^bare = 446.279 keV`, see [10] §7) — set at its creation on the Compton scale through energy conservation. The Compton length `λ_C = ℏ/(m_e c)` is the topological limit of localization: the knot does not exist on smaller scales (the mass of one cell of the medium would exceed the energy of the knot).
 
 **What depends on the medium:**
 
 What is measured as the "mass" of the electron is the **energy of the field `n`** (plus the `u`-coupling) **distributed across cells of the surrounding medium**. The number of cells and the manner of distribution of that energy (in contrast to the knot itself — a pointlike topological singularity on the Compton scale) are set by the **local stiffness** of the medium:
 
-- In the **vacuum** (the most dilute Cosserat medium, `l₀ ≈ 4.59 Å`): the energy is distributed on a scale `~R_r · l₀ ≈ l₀/2 ≈ 2.3 Å` — about `1188` vacuum cells per radius (since `l₀/λ_C ≈ 1188 = 1/(16α²)`).
+- In the **vacuum** (the most dilute Cosserat medium, `l₀ ≈ 4.59 Å`): the energy is distributed on a scale `~R_r · l₀ ≈ l₀/2 ≈ 2.3 Å` — about `1190` vacuum cells per radius (since `l₀/λ_C ≈ 1190`, leading term `1/(16α²)`).
 - On **different atomic orbitals** (1s, 2s, 2p, 3s, ...): the local stiffness of the field is higher because of proximity to the nucleus, the distribution contracts, and the number of cells decreases. Each orbital has its own characteristic cell count.
 - The **natural lower limit** of the distribution is the Compton length itself, `λ_C ≈ 3.86 × 10⁻¹³ m` (one "cell"): below that scale the knot does not exist (there is nothing left to "tie"). This is a **topological** limit, not "infinite stiffness."
 
@@ -793,11 +793,11 @@ The balance condition (Derrick stability) fixes `L_Skyrme = l₀`. For a hopfion
 r_v = L_Skyrme/2 = l₀/2 (7.5)
 ```
 
-![Canonical electron hopfion (`Q_H = -1`) at `R_r = 0.51688`, `R_z = 0.76148`, `w = 0.62580`. The colored panels are 2D slices through the (`r ≥ 0`, `z`) half-plane; axial symmetry makes a single such slice sufficient to encode the full field. **Top-left:** `n_z(r, z)` — the `z`-component of the director. The red background (`n_z ≈ +1`) is the vacuum; the blue spot (`n_z = -1`) is the vortex tube core; black contours mark the levels `n_z = -0.5, 0, +0.5`. **Top-right:** `|n_⊥|(r, z)` — the magnitude of the in-plane components; highlights the shell where the director "lies sideways" and sets the tube radius `r_v ≈ 0.5 ℓ_0`. **Bottom-left:** the topological charge density `ρ_Q = n·(∂_r n × ∂_z n)`; localized near the tube and negative (its volume integral equals `Q_H = -1`). **Bottom-right:** 3D shape with a 90°-wedge cut out (3/4 of a full revolution shown); the red surface is the iso-contour `n_z = -0.5` (the body of the soliton) obtained by revolving the 2D cross-section around the symmetry axis; the black arc is the vortex tube axis (`n = -ẑ`, a circle of radius `R_r` in the plane `z = 0`); the two black dots on the cut faces mark its endpoints. All panels use the exact Hopf-ansatz formula. Reproduced by `verifications/canonical_derrick/hopfion_visualize.py`.](../../verifications/canonical_derrick/hopfion_visualize.png)
+![Canonical electron hopfion (`Q_H = -1`) at `R_r = 0.64082`, `R_z = 0.80729`, `w = 0.70200`. The colored panels are 2D slices through the (`r ≥ 0`, `z`) half-plane; axial symmetry makes a single such slice sufficient to encode the full field. **Top-left:** `n_z(r, z)` — the `z`-component of the director. The red background (`n_z ≈ +1`) is the vacuum; the blue spot (`n_z = -1`) is the vortex tube core; black contours mark the levels `n_z = -0.5, 0, +0.5`. **Top-right:** `|n_⊥|(r, z)` — the magnitude of the in-plane components; highlights the shell where the director "lies sideways" and sets the tube radius `r_v ≈ 0.5 ℓ_0`. **Bottom-left:** the topological charge density `ρ_Q = n·(∂_r n × ∂_z n)`; localized near the tube and negative (its volume integral equals `Q_H = -1`). **Bottom-right:** 3D shape with a 90°-wedge cut out (3/4 of a full revolution shown); the red surface is the iso-contour `n_z = -0.5` (the body of the soliton) obtained by revolving the 2D cross-section around the symmetry axis; the black arc is the vortex tube axis (`n = -ẑ`, a circle of radius `R_r` in the plane `z = 0`); the two black dots on the cut faces mark its endpoints. All panels use the exact Hopf-ansatz formula. Reproduced by `verifications/canonical_derrick/hopfion_visualize.py`.](../../verifications/canonical_derrick/hopfion_visualize.png)
 
-**Numerical confirmation** [10]. The canonical bare functional (`K₁ = K₂ = 2`, `K₃/K₁ = 1+2π`, `c₄ = 1`, `μ_c = 2π`, with no mass term) is verified on a 768×1536 grid via a **Derrick scan**: rescaling the Hopf ansatz `(R_r, R_z) → λ·(R_r, R_z)` over `λ ∈ [0.6, 3.0]` produces a clean V-minimum **at λ = 1**, with `E_tot(λ=1) = 507.995 keV` (identified with the **bare** electron mass `m_e^bare`; the physical `m_e (CODATA) = 510.999 keV` differs by `+3.004 keV ≈ 7·M₀c²`, which in [10] §7.2 is put forward as the hypothesis of standard QED renormalization acting in parallel on `α_bare = 2⁻⁷ → α(0) = 1/137`). The empirical scaling laws of the three energy components — `E_OF ∝ λ`, `E_Sk ∝ λ⁻¹`, `E_u ∝ λ²` (the last because the Cosserat screening length `l_c = 1/√μ_c` is **fixed** in absolute units and does not co-scale with the soliton) — reproduce the expected Derrick exponents, and the Derrick residual `dE/dλ|_{λ=1} = E_OF − E_Sk + 2·E_u = +4.22 keV` is consistent with the discrete sampling spacing (`<1 %` of `E_tot`). The topological charge is preserved (`|Q+1| < 2.2·10⁻⁴` even at λ=3.0; `<10⁻⁵` at λ=1.0) across the entire scan. The geometric identity (7.5) `r_v = l₀/2` is thereby **embedded in the Derrick balance of the full functional**: the canonical triple `(R_r, R_z, w)` is a genuine energy minimum, not an arbitrarily chosen point. *Remark on the origin of the parameters.* The numerical values `(R_r, R_z, w) ≈ (0.51688, 0.76148, 0.62580)` were obtained in [10] by a direct full-field minimization of the functional `E[n, u]` (Nelder–Mead on a 1024×2048 grid); they are taken here as already-known and tested for stationarity along the `λ` direction.
+**Numerical confirmation** [10]. The canonical bare functional (`K₁ = K₂ = 2`, `K₃/K₁ = 1+2π`, `c₄ = 1`, `μ_c = 2π`, with no mass term) is verified on a `1024×2048` grid (dyadic box `17 × 33 l₀`) via a **Derrick scan**: rescaling the Hopf ansatz `(R_r, R_z) → λ·(R_r, R_z)` over `λ ∈ [0.6, 3.0]` produces a clean V-minimum **at λ = 1**, with `E_tot(λ=1) = 446.279 keV` (identified with the **bare** electron mass `m_e^bare`). The components `E_OF` and `E_Sk` follow the expected Derrick scalings `E_OF ∝ λ`, `E_Sk ∝ λ⁻¹`; the screened `E_u` is small (`<1 %` of `E_tot`) and, because the Cosserat screening length `l_c = 1/√μ_c` is **fixed**, does not scale as `λ²` but saturates. The Derrick residual `E_OF − E_Sk + 2·E_u ≈ +8.8 keV` at `λ=1` is only an approximate slope estimate (the screened `E_u` does not follow `λ²`); the authoritative signature of balance is the discrete minimum of `E_tot` itself, lying exactly at `λ = 1`. The topological charge is preserved across the entire scan (`|Q+1| < 1.2·10⁻³` even at λ=3.0; `~4·10⁻⁵` at λ=1.0). The geometric identity (7.5) `r_v = l₀/2` is thereby **embedded in the Derrick balance of the full functional**: the canonical triple `(R_r, R_z, w)` is a genuine energy minimum, not an arbitrarily chosen point. *Remark on the origin of the parameters.* The numerical values `(R_r, R_z, w) ≈ (0.64082, 0.80729, 0.70200)` were obtained in [10] by a direct minimization of the functional `E[n, u]` (Nelder–Mead on a `1024×2048` grid, dyadic box `17 × 33`); they are taken here as already-known and tested for stationarity along the `λ` direction.
 
-![Derrick scan of the canonical electron configuration. Left: total energy `E_tot(λ)` (V-shape with minimum at `λ = 1.00`, `E_tot = 507.995 keV` = `m_e^bare`; the dashed line is the CODATA `m_e = 510.999 keV`). Right: the three energy components on a log scale (`E_OF ∝ λ`, `E_Sk ∝ λ⁻¹`, `E_u ∝ λ²`). Canonical parameters: `K₁ = K₂ = 2`, `K₃ = 14.56`, `c₄ = 1`, `μ_c = 2π` (no mass term). Reproduced by `verifications/canonical_derrick/derrick_scan.py`.](../../verifications/canonical_derrick/derrick_scan.png)
+![Derrick scan of the canonical electron configuration. Left: total energy `E_tot(λ)` (V-shape with minimum at `λ = 1.00`, `E_tot = 446.279 keV` = `m_e^bare`; the dashed line is the dyadic form `(2¹⁰+2⁴−1)·M₀c² = 446.26 keV`). Right: the three energy components on a log scale (`E_OF ∝ λ`, `E_Sk ∝ λ⁻¹`, screened `E_u` — saturating). Canonical parameters: `K₁ = K₂ = 2`, `K₃ = 14.56`, `c₄ = 1`, `μ_c = 2π` (no mass term). Reproduced by `verifications/canonical_derrick/derrick_scan.py`.](../../verifications/canonical_derrick/derrick_scan.png)
 
 Hence (7.5) is a **derived** relation, not a postulate. The only postulate that remains is P5, the statement of circular cross-sectional geometry.
 
@@ -916,7 +916,7 @@ Integrating from `μ = M_Z = 91 GeV` down to `μ = m_e c² = 0.511 MeV`, standar
 
 The fine-structure constant is among the most precisely measured dimensionless constants of nature: `α⁻¹ = 137.035999084(21)`, eleven significant figures. Feynman called it "a magic number that comes to us with no understanding by man"; the question of its origin from more fundamental principles has stood since Sommerfeld and is open within standard physics.
 
-Two points in our derivation are worth emphasizing. First, the experimental value of `α` is never used on the right-hand side — neither as a calibration nor as a correction; `1/128` follows from pure algebra (the `Π`-theorem plus the topological coefficient `η = 2π`) and a single geometric postulate, P5. Second, the answer `2⁻⁷` is a simple dyadic fraction. This is consistent with the integer topology of charges and with the fact that Cosserat defects have a discrete spectrum of symmetries; the general dyadic structure of the program is its own story, in [24].
+Two points in our derivation are worth emphasizing. First, the experimental value of `α` is never used on the right-hand side — neither as a calibration nor as a correction; `1/128` follows from pure algebra (the `Π`-theorem plus the topological coefficient `η = 2π`) and a single geometric postulate, P5. Second, the answer `2⁻⁷` is a simple dyadic fraction. This is consistent with the integer topology of charges and with the fact that Cosserat defects have a discrete spectrum of symmetries.
 
 The discrepancy between `1/128` and the familiar low-energy `1/137` is not a flaw of the derivation but precisely what standard QED predicts through vacuum polarization (§7.7). Our theory provides a UV boundary condition; QED carries it down to the IR-measured value.
 
@@ -1186,19 +1186,20 @@ Dimensionless combinations of these four constants:
 | `κ_grav = G μ₀/c²` | `≈ 9.3 × 10⁻³⁴` | Weakness of gravity | — |
 | `l_G/l₀ ⇔ m₀/m_G^{†}` | `≈ 10²⁵` | **Channel** hierarchy (grav ↔ vacuum) | `(l₀, m₀) ↔ (l_G, m_G)` |
 | `λ_C/l_P ⇔ m_P/m_e` | `≈ 10²²` | **Mass** hierarchy (Planck ↔ electron) | `(λ_C, m_e) ↔ (l_P, m_P)` |
-| `m_e/m₀ ⇔ l₀/λ_C = 1/(16α²)` | `≈ 1190 = 2¹⁰` (bare) | α²-scaling (Compton ↔ structural cell), §5.5 | `(l₀, m₀) ↔ (λ_C, m_e)` |
+| `m_e/m₀ ⇔ l₀/λ_C = 1/(16α²)` | `≈ 1039` (bare) | α²-scaling (Compton ↔ structural cell), §5.5 | `(l₀, m₀) ↔ (λ_C, m_e)` |
 
 `†` `m_G ≡ ℏ/(c · l_G) ≈ 7.6 × 10⁻⁵⁹` kg — the mass corresponding to `l_G` on the hyperbola.
 
 **α²-scaling: the relation `m_e/m₀ = 1/(16α²)`.** This is the ratio of the scales "vacuum cell ↔ electron Compton" on the hyperbola. Numerically:
 
 ```
-m_e^bare/m₀ = 507.997 keV / 429.51 eV = 1182.7
-1/(16α²) = 1/(16 · (1/137.036)²) ≈ 1173.5 (physical, agreement 1.4%)
-1/(16α_bare²) = 1/(16 · 2⁻¹⁴) = 2¹⁰ = 1024 (bare, exact)
+m_e^bare/m₀ = 446.279 keV / 429.51 eV = 1039.0   (bare)
+1/(16α_bare²) = 1/(16 · 2⁻¹⁴) = 2¹⁰ = 1024        (leading term, exact)
+m_e/m₀ = x² + x/2 − 1 = 1024 + 16 − 1 = 1039      (full dyadic form, [10] §7.2)
+1/(16α²) = 1/(16 · (1/137.036)²) ≈ 1173.5          (leading term, physical; full ≈ 1190)
 ```
 
-In bare dyadic form `m_e/m₀ = 2¹⁰`. Physical meaning: the electron mass is the **cost of α²-closure of a topological knot** in the medium; the coefficient 16 is tied to the dyadic structure of the hopfion (detailed derivation in [24]).
+In bare dyadic form `m_e/m₀ = 2¹⁰ + 2⁴ − 1 = 1039`; the leading term `2¹⁰ = 1/(16α_bare²)` accounts for the pure `α²`-scaling, the sub-terms `+2⁴ − 1` for the dyadic-structure correction of the knot ([10] §7.2). Physical meaning: the electron mass is the **cost of α²-closure of a topological knot** in the medium; the coefficient 16 is tied to the dyadic structure of the hopfion.
 
 **Remark on consistency with the hyperbola.** Each length ratio in the table is **identical** to the inverse mass ratio through `m·l = ℏ/c` — visible in every row. The differing numerical values of the two "hierarchies" (`10²⁵` for channels and `10²²` for masses) are not a contradiction but a consequence of relating **different pairs of points** on one hyperbola. The exact relation:
 
@@ -1386,7 +1387,7 @@ The difference lies at the level of **justification**, not of **operations**.
 **Consequence 1: uniqueness of the choice of fundamental constants.** In the standard approach any three constants can equally be chosen for the reduction. In our approach the **specific set `{ε₀, μ₀, ℏ, G}`** is singled out by physics: it is these four quantities that structurally specify the Cosserat medium through P1, P2, P3, P4.
 
 **Consequence 2: predictive power.** In the standard approach the values of fundamental constants (e.g. `α = 1/137`, `m_e/m_P ≈ 10⁻²²`) are experimental numbers. In our approach:
-- `α` is derived from the structure of the Cosserat functional (Section 7 of this work; full analysis in [24]).
+- `α` is derived from the structure of the Cosserat functional (Section 7 of this work).
 - The hierarchy `l_G/l₀ ≈ 10²⁵` is an open question, equivalent to the mass-scale hierarchy problem.
 
 **Consequence 3: conceptual coherence.** EM and gravity are two channels of one medium, not parallel "fundamental interactions." The `10⁴²` hierarchy is interpreted as `α·(m_P/m_e)²` with geometric root in `l_G/l₀ ≈ 10²⁵`, not as the "weakness of gravity" as a fundamental property.
@@ -1430,9 +1431,7 @@ The program of dimensional reduction of the SI has been carried out within a two
 
 The present paper opens a series of six related publications developing different aspects of the Cosserat program:
 
-**Work [10] — electron mass.** "Derivation of the bare electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional minimization" — in preparation. Uses the dimensional reduction of the present paper to formulate the variational problem. Result: on a canonical 1024×2048 grid the numerical `m_e^bare = 507.997 keV` — the bare (UV) electron mass in the Cosserat vacuum; with no free parameters. The gap to CODATA `m_e = 510.999 keV` is `3.002 keV ≈ 7·M₀c²` and is interpreted ([10] §7.2) as the standard QED renormalization acting in parallel on both bare parameters (`α_bare = 1/128 → α(0) = 1/137` and `m_e^bare → m_e^phys`).
-
-**Work [24] — fine-structure constant.** "Topological charge and the fine-structure constant in the Cosserat picture" — in preparation. Full derivation of `α_bare = 1/128 = 2⁻⁷` and analysis of the QED renormalization down to the observed `1/137`.
+**Work [10] — electron mass.** "Derivation of the bare electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional minimization". Uses the dimensional reduction of the present paper to formulate the variational problem. Result: on a 1024×2048 grid (dyadic box `17 × 33 l₀`) the numerical `m_e^bare = 446.279 keV` — the bare electron mass in the Cosserat vacuum; with no free parameters. The dimensionless minimum `Ẽ_min ≈ 1039` fits the dyadic form `m_e/m₀ = x² + x/2 − 1` (`x = α⁻¹/4`); the same shift of the scale `x` that takes `α_bare = 1/128 → α(0) = 1/137` takes the bare mass to the physical `m_e ≈ 511 keV` ([10] §7).
 
 **Work [25] — Maxwell equations.** "Maxwell equations as a theorem of the Cosserat functional" — in preparation. Shows that in the adiabatic, long-wavelength limit Maxwell's equations are **derived** from minimization of `E[n, u]`, promoting postulates P1, P2 to consequences.
 
@@ -1469,6 +1468,16 @@ The violation of Bell's inequalities is intelligible in this language too: local
 In physics there is a familiar pattern: introducing an intermediate structure between two descriptions often simplifies the mathematical apparatus. The earliest example is Maxwell's own argument (1861): the aether as a mediator turned the nonlocal Coulomb action at a distance into local field equations; half a century later Einsteinian spacetime did the same thing for Newtonian gravity, replacing it with local geometry. The Cosserat medium in this paper occupies an analogous position — but a broader one: it acts as a mediator between the topology of defects (`Q_H ∈ ℤ` in `π₃(S²)`) and the observable particles and fields, reducing the heterogeneous apparatus of QM (Hilbert spaces), QED (gauge fields), and GR (pseudo-Riemannian geometry) to a single problem — minimization of the functional `E[n, u]`.
 
 This observation is an indication of mathematical economy of the program, not a proof of its correctness; the latter is decided by numerical predictions [10, 23, 24].
+
+---
+
+## Methodology and use of AI tools
+
+In preparing this work the author used the large language model **Claude (Anthropic)** for the following auxiliary tasks: writing Python scripts for numerical verification of the structural identities (§§5.4, 6.3, 7.4, A.5 — evaluation of `l₀`, `M₀c²`, `α_bare = 1/128`, dimensional consistency checks), stylistic editing and proofreading of the manuscript, and assistance with bibliographic references and table formatting.
+
+All key elements of the work — postulates P1–P4, the structural identifications of the electromagnetic and gravitational sectors, the derivations of the identities `m·l = ℏ/c` and `l₀⁴ = ε₀ℏc/(2π)`, the geometric interpretation of `α_bare`, the hierarchy of scales, and the reduction of the SI base — are due to the author.
+
+The author has thoroughly checked all generated code (via independent reproduction of the numerical values of the constants) and the manuscript text, and takes full responsibility for the final content and results of the work.
 
 ---
 
@@ -1531,8 +1540,6 @@ The author thanks:
 [22] **Abbott, B.P. et al. (LIGO/Virgo Coll.)** (2017). "Gravitational Waves and Gamma-Rays from a Binary Neutron Star Merger: GW170817 and GRB 170817A." *Astrophys. J. Lett.* **848**, L13. (The bound `|Δv|/c < 10⁻¹⁵` on the speed of gravitational waves.)
 
 [23] **Yeusiyevich, I.V.** (2026). "Proton as a disclination of the medium lattice: mass and lattice length convergence." (In preparation, same DOI series.) — numerical computations for the baryonic sector of the Cosserat program: the proton as a disclination defect of the medium's lattice (in contrast to the hopfionic knot of the electron), convergence of mass and characteristic lattice length in the neighbourhood of the disclination. Preliminary results: `m_p ≈ 992 MeV` (accuracy 5.7% from the experimental 938.272 MeV), `r_p ≈ 0.84` fm; the hierarchy `m_p/m_e ≈ 1836` is interpreted via the running of the medium's effective elasticity from the electron scale `l₀` to the nucleon scale.
-
-[24] **Yeusiyevich, I.V.** (2026). "Topological charge and the fine-structure constant in the Cosserat picture." (In preparation, same DOI series.) — relates `α` to the topological structure of hopfionic configurations; preliminary result `α_bare = 1/128 = 2⁻⁷`, in agreement with the QED renormalization to the observable `1/137`.
 
 [25] **Yeusiyevich, I.V.** (2026). "Maxwell equations as a theorem of the Cosserat functional." (In preparation, same DOI series.) — shows that in the adiabatic, long-wavelength limit Maxwell's equations are derived from minimization of the Cosserat-medium functional `E[n, u]`, promoting postulates P1, P2 to consequences of a more fundamental structure.
 
@@ -1600,7 +1607,7 @@ The author thanks:
 | `κ_grav = Gμ₀/c² ≈ 9.3 × 10⁻³⁴` | Weakness of gravity |
 | `l_G/l₀ ≈ 10²⁵` | Channel hierarchy |
 | `m_P/m_e ≈ 10²²` | Mass hierarchy (equivalent) |
-| `α_bare = 1/128 = 2⁻⁷` | "Bare" `α` (Section 7, [24]) |
+| `α_bare = 1/128 = 2⁻⁷` | "Bare" `α` (Section 7) |
 | `η = 2π` | Cosserat coupling (see [10]) |
 | `K₃/K₁ = 1 + η = 1 + 2π` | Elastic anisotropy (see [10]) |
 

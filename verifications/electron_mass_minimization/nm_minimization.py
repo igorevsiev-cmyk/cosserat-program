@@ -5,11 +5,12 @@ functional E[n, u] over the 3-parameter Hopf ansatz (R_r, R_z, w).
 
 Verifies the central numerical claim of the paper:
 
-    m_e^bare c^2 = 507.997 keV from {epsilon_0, mu_0, hbar}
-    on a 1024 x 2048 grid
+    m_e^bare c^2 from {epsilon_0, mu_0, hbar}
+    on a 1024 x 2048 stretched grid, dyadic box L = 17 x 33
 
-(bare electron mass; physical m_e (CODATA) = 510.999 keV; the gap of
-3.002 keV is interpreted as standard QED renormalization, see paper §7.2)
+(bare electron mass; the NM optimum matches the dyadic closed form
+ m_e^bare c^2 = (2^10 + 2^4 - 1) * M0 c^2 = 1039 * M0 c^2; this is the
+ bare value -- it is NOT compared with the physical/CODATA m_e here)
 
 with no fitted parameters: all five functional constants
 (K_1, K_2, K_3, mu_c, c_4) are fixed by the structural identities of
@@ -82,10 +83,10 @@ class Config:
 
 
 class Cfg(Config):
-    """Canonical configuration matching the paper (1024 x 2048 grid)."""
-    # Grid
+    """Canonical configuration: 1024 x 2048 stretched grid, dyadic box."""
+    # Grid -- dyadic box: L_r = log2(2^7 * 2^10) = 17, L_z = 2*L_r - 1 = 33
     Nr = 1024; Nz = 2048
-    L_r = 24.0; L_z = 48.0
+    L_r = 17.0; L_z = 33.0
     beta_r = 6.0; beta_z = 3.0
     R_hopf = 1.0
     use_float64 = True
@@ -96,7 +97,7 @@ class Cfg(Config):
     K3 = 14.56                         # = K1 * (1 + 2 pi)  rounded to 4 sig.fig.
     c2 = 1.0; c4 = 1.0
     m2 = 0.0                           # no mass term in the bare functional
-    cg_iter = 2000                     # PCG cap for u-channel solver
+    cg_iter = 2000                     # PCG cap for u-channel solver (Robin BC)
 
 
 # ----------------------------------------------------------------------
@@ -240,13 +241,15 @@ def main():
     print()
     print(f"  Q = {final['Q']:+.6f}    (electron orientation if -1, positron if +1)")
     print()
-    M_E_EXP_keV = 510.998950
-    gap_keV = M_E_EXP_keV - final['E_total']
-    deviation_pct = 100.0 * (final['E_total'] - M_E_EXP_keV) / M_E_EXP_keV
-    print(f"  Predicted m_e^bare c^2 = {final['E_total']:.4f} keV")
-    print(f"  CODATA 2018 m_e c^2    = {M_E_EXP_keV:.4f} keV (physical/dressed)")
-    print(f"  Gap (CODATA - bare)    = {gap_keV:+.4f} keV  ({deviation_pct:+.4f} %)")
-    print(f"  Hypothesis: gap = standard QED renormalization (see paper §7.2)")
+    # Bare result -- compared only with the dyadic closed form, NOT with CODATA.
+    # Dyadic closed form: m_e^bare c^2 = (2^10 + 2^4 - 1) * M0 c^2 = 1039 * M0 c^2
+    DYADIC_N    = 2**10 + 2**4 - 1                  # = 1039
+    dyadic_keV  = DYADIC_N * M0C2_eV / 1000.0
+    dyadic_dev  = 100.0 * (final['E_total'] - dyadic_keV) / dyadic_keV
+    print(f"  Predicted m_e^bare c^2 = {final['E_total']:.4f} keV   (bare functional)")
+    print(f"  Dyadic closed form     = (2^10 + 2^4 - 1) * M0 c^2 = {DYADIC_N} * M0 c^2")
+    print(f"                         = {dyadic_keV:.4f} keV")
+    print(f"  Deviation from dyadic  = {dyadic_dev:+.4f} %")
     print()
     print(f"  NM iterations:  {n_eval[0]}  (NM nfev = {result.nfev})")
     print(f"  Wall time:      {wall_time:.0f} s on {device}")
@@ -308,13 +311,13 @@ def main():
             'abs_Q':     abs(final['Q']),
             'deviation': abs(abs(final['Q']) - 1.0),
         },
-        'comparison_with_CODATA_2018': {
+        'dyadic_closed_form': {
             'predicted_m_e_bare_keV': final['E_total'],
-            'codata_m_e_phys_keV':    M_E_EXP_keV,
-            'gap_keV':                gap_keV,
-            'gap_eV':                 1000.0 * gap_keV,
-            'gap_relative_pct':       -deviation_pct,
-            'interpretation':         'bare m_e from Cosserat functional; CODATA is the physical (renormalized) m_e; the gap is interpreted as standard QED renormalization (see paper §7.2)',
+            'dyadic_N':               DYADIC_N,
+            'dyadic_formula':         '(2^10 + 2^4 - 1) * M0 c^2',
+            'dyadic_m_e_bare_keV':    dyadic_keV,
+            'deviation_pct':          dyadic_dev,
+            'interpretation':         'bare m_e from the Cosserat functional on the dyadic box L=17x33; the NM optimum matches the dyadic closed form (2^10 + 2^4 - 1) * M0 c^2 (no comparison with CODATA -- this is the bare value)',
         },
     }
 

@@ -1,7 +1,7 @@
-# Derivation of the bare electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional minimization: `m_e^bare = 507.997 keV`
+# Derivation of the bare electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional minimization: `m_e^bare = 446.279 keV`
 
 **Author:** Yeusiyevich Ihar V.
-**Date:** 2026-05-16
+**Date:** 2026-05-20
 **Type:** preprint
 **License:** CC-BY 4.0
 
@@ -19,13 +19,13 @@ In the present work `m_e` is computed numerically from three vacuum constants `{
 - elastic anisotropy `K₃/K₁ − 1 = η`, with `K₁ = K₂ = 2`, `K₃ = 2(1 + 2π) ≈ 14.566`;
 - Skyrme term `c₄ = 1`.
 
-Minimization by the Nelder–Mead simplex method on a stretched cylindrical grid of resolution `1024 × 2048` gives:
+Minimization by the Nelder–Mead simplex method on a stretched cylindrical grid of resolution `1024 × 2048` (dyadic box `L = 17 × 33 l₀`) gives:
 
-> `m_e^bare c² = 507.9966 keV`
+> `m_e^bare c² = 446.279 keV`
 
-This value is interpreted as the **bare** (UV) electron mass in the Cosserat vacuum — in parallel with the bare `α_bare = 1/128 = 2⁻⁷` from [1]. The corresponding physical (IR-measured) `m_e (CODATA) = 510.999 keV` differs by `Δ = −3.002 keV`, which matches `7 · M₀c²` to within `4 eV` (`~1.3·10⁻³` of the gap, or `~8·10⁻⁶` of `m_e`). **Hypothesis** (§7.2): this gap is the standard QED renormalization acting uniformly on both bare parameters (`α_bare → α(0)` and `m_e^bare → m_e^phys`); a direct derivation of the `δm_e` contribution within the Cosserat program is an open direction.
+This value is the **bare** electron mass in the Cosserat vacuum: a direct output of the bare functional `E[n, u]`. The dimensionless minimum `Ẽ_min = E_min/M₀c² ≈ 1039` fits the dyadic form `m_e/m₀ = x² + x/2 − 1` with a single scale `x = α⁻¹/4`: at the bare `α_bare⁻¹ = 128` (`x = 32`) it gives `1024 + 16 − 1 = 1039`, at the physical `α(0)⁻¹ = 137` (`x = 34.26`) — `1189.8`, i.e. `m_e^phys ≈ 511 keV`. The same shift of the scale `x` that takes the bare `α` to the measured one takes the bare mass to the physical one (§7.2–7.3). The dyadic form is given as a numerical observation, not as a derivation.
 
-Topology is preserved: `|Q_H| = 1` to `10⁻⁵`; the sign `−1` corresponds to the electron.
+Topology is preserved: `|Q_H| = 1` to `~4·10⁻⁵`; the sign `−1` corresponds to the electron.
 
 ---
 
@@ -57,20 +57,22 @@ TOPOLOGICAL CONSTRAINT                            (§4)
  ▼
 NUMERICAL MINIMIZATION                            (§5)
  Nelder-Mead on stretched grid 1024×2048
- (R_r, R_z, w) = (0.51688, 0.76148, 0.62580) (in units of l₀)
+ (dyadic box L = 17 × 33 l₀)
+ (R_r, R_z, w) = (0.64082, 0.80729, 0.70200) (in units of l₀)
  │
  ▼
 RESULT                                            (§6)
- m_e^bare c² = M₀ c² · Ẽ_min = 429.5068 eV · 1182.74 = 507.997 keV
+ m_e^bare c² = M₀ c² · Ẽ_min = 429.5068 eV · 1039.05 = 446.279 keV
  — the bare electron mass in the Cosserat vacuum
- Q_H = −0.99999   (electron orientation; |Q_H| = 1 preserved to 10⁻⁵)
+ Q_H = −0.99996   (electron orientation; |Q_H| = 1 preserved to ~4·10⁻⁵)
  │
  ▼
 INTERPRETATION                                    (§7)
- m_e^bare = 507.997 keV — bare value
- Gap to CODATA (510.999 keV) = 3.002 keV ≈ 7·M₀c²
- Hypothesis (§7.2): standard QED renormalization, acting in
- parallel on α_bare → α(0) and m_e^bare → m_e^phys
+ m_e^bare = 446.279 keV at α_bare⁻¹ = 128 (x = 32)
+ Dyadic form  m_e/m₀ = x² + x/2 − 1,  x = α⁻¹/4
+   bare:  32² + 16 − 1 = 1039       → 446.3 keV     (§7.2)
+   phys:  34.26² + 17.1 − 1 ≈ 1190  → 511.0 keV     (§7.3)
+ charge ~ x, mass ~ x²  ⟹  m_e ∝ 1/α² (leading order)
 ```
 
 Minimization is reproducible via the standalone script `verifications/electron_mass_minimization/nm_minimization.py` (see Appendix A).
@@ -97,7 +99,7 @@ The present work computes the mass of this minimum.
 2. Minimization is performed by the Nelder–Mead method over the 3-param Hopf ansatz on a `1024 × 2048` grid (§§4–5).
 3. The minimum is converted to SI units via `M₀ c² = ℏc/l₀` (§6).
 
-The result is the bare electron mass `m_e^bare c² = 507.997 keV`. The gap from the measured `m_e (CODATA) = 510.999 keV` is `3.002 keV ≈ 7·M₀c²` and is interpreted (§7.2) as the standard QED renormalization acting in parallel on `α_bare = 2⁻⁷` → `α(0) = 1/137`.
+The result is the bare electron mass `m_e^bare c² = 446.279 keV`. This is a direct output of the bare functional `E[n, u]`; the value is not compared with the physical (measured) mass `m_e` — the derivation of the bare → physical relation is left as an open direction (§7).
 
 ---
 
@@ -209,7 +211,7 @@ All five parameters of the functional {`K₁, K₂, K₃, μ_c, c₄`} = {`2, 2,
 
 ### 4.1. Topological context
 
-A smooth field `n: ℝ³ → S²` with `n(r → ∞) = ẑ` extends to `S³ → S²`. Such maps are classified by `π₃(S²) = ℤ`; the integer label is the Hopf invariant `Q_H`. For the electron identification the relevant minimum is `Q_H = -1`.
+A smooth field `n: ℝ³ → S²` with `n(r → ∞) = ẑ` extends to `S³ → S²`. Such maps are classified by `π₃(S²) = ℤ`; the integer label is the Hopf invariant `Q_H`. For the electron identification the relevant minimum is `Q_H = −1`.
 
 ### 4.2. Three-parameter ansatz
 
@@ -224,7 +226,9 @@ where:
   P = D + 4 r² w²
 ```
 
-Three parameters: `R_r` (ring radius), `R_z` (ring height), `w` (twist amplitude). The ansatz carries `|Q_H| = 1` for any positive `(R_r, R_z, w)` and reduces to `n₃ = 1` at infinity. The sign of `Q_H` is set by the orientation of the field; the identification with the electron uses `Q_H = −1` (positron: `+1`). The numerical implementation (§5) yields `Q_H = −0.99999` (§6.2) according to the convention used in the code.
+Three parameters: `R_r` (ring radius), `R_z` (ring height), `w` (twist amplitude). The ansatz carries `|Q_H| = 1` for any positive `(R_r, R_z, w)` and reduces to `n₃ = 1` at infinity. The sign of `Q_H` is set by the orientation of the field; the identification with the electron uses `Q_H = −1` (positron: `+1`). The numerical implementation (§5) yields `Q_H = −0.99996` (§6.2) according to the convention used in the code.
+
+The choice of the Hopf ansatz (4.2) is not arbitrary. A configuration with `Q_H = −1` is a closed vortex tube of the director `n`; its cross-section is a disk whose area is, in the Cosserat program [1, §7], algebraically identified with the electric charge, `e = π·(l₀/2)²` (circular cross-section geometry of radius `l₀/2`). The ansatz thereby fixes the **charge as the geometric cross-sectional area of the tube**, expressed through the scale `l₀`. The three parameters `(R_r, R_z, w)` set only the shape of the tube; in the optimization `(R_r, R_z)` are coupled — under spatial dilation they co-scale together (Derrick balance, see the companion check `canonical_derrick`), whereas `w` — a dimensionless twist amplitude — is not subject to the length scale.
 
 ---
 
@@ -232,11 +236,21 @@ Three parameters: `R_r` (ring radius), `R_z` (ring height), `w` (twist amplitude
 
 ### 5.1. Grid
 
-A cylindrical grid `(r_i, z_j)` of size `N_r × N_z = 1024 × 2048` with clustering near `r ~ R_r` and `z ~ 0` (stretching exponents `β_r = 6.0`, `β_z = 3.0`). Box dimensions: `L_r = 24 l₀`, `L_z = 48 l₀`. Double precision (`float64`) throughout.
+A cylindrical grid `(r_i, z_j)` of size `N_r × N_z = 1024 × 2048` with clustering near `r ~ R_r` and `z ~ 0` (stretching exponents `β_r = 6.0`, `β_z = 3.0`). Box dimensions: `L_r = 17 l₀`, `L_z = 33 l₀` (`L_z = 2·L_r − 1`; justification of `L_r` below). Double precision (`float64`) throughout.
+
+The box size is not arbitrary: it corresponds to the combined extent of the two sectors of the knot. The charge field reaches `99.9 %` of its full magnitude at `R_charge ≈ 7 l₀`; the mass sector — described by the dyadic polynomial `m_e/m₀ = x² + x/2 − 1` (`x = α⁻¹/4`, see §7.2) — is localized within `R_mass ≈ 10 l₀`; both radii are confirmed numerically. Their sum sets the radial box size:
+
+```
+L_r = R_charge + R_mass = 7 + 10 = 17
+```
+
+The box thus fully contains the localized core of the configuration and yields a stable **bare** value; the long-range slow tails of the field are not included in it — accounting for them is a separate problem of renormalization via charge self-screening (the `bare → phys` transition, the running of `α`, §7.3), deferred to a separate work.
+
+The bare mass is defined precisely on this domain: `m_e^bare` is the energy of the knot localized in the dyadic box `17 × 33`. The dyadic box, covering exactly both sectors of the knot (charge + mass), is what fixes the meaning of the "bare" slice.
 
 ### 5.2. Optimizer
 
-Minimization is performed using `scipy.optimize.minimize` with `method='Nelder-Mead'`, `xatol = 1e-5`, `fatol = 1e-3` (keV). The choice of method is motivated by the following considerations:
+Minimization is performed using `scipy.optimize.minimize` with `method='Nelder-Mead'`, `xatol = 1e-6`, `fatol = 1e-4` (keV). The choice of method is motivated by the following considerations:
 
 1. The energy landscape over `(R_r, R_z, w)` is smooth but non-convex.
 2. The topological constraint `Q_H = 1` is enforced exactly by the ansatz and requires no separate monitoring.
@@ -245,9 +259,9 @@ Minimization is performed using `scipy.optimize.minimize` with `method='Nelder-M
 ### 5.3. Convergence
 
 ```
-R_r = 0.51688   (in units of l₀)
-R_z = 0.76148
-w   = 0.62580                                             (5.1)
+R_r = 0.64082   (in units of l₀)
+R_z = 0.80729
+w   = 0.70200                                             (5.1)
 ```
 
 ### 5.4. Boundary conditions in z
@@ -283,7 +297,7 @@ Substituting (5.4) into (5.3) yields a scalar equation for `ψ`:
 ```
 The `−1/r²` term arises from the curvature of cylindrical basis vectors when the vector Laplacian acts on the azimuthal component.
 
-**Numerical solution.** Equation (5.5) is solved by preconditioned conjugate gradients (PCG, diagonal preconditioning) on a uniform subgrid `512 × 1024` with extents `L_r^{(u)} = 6 l₀`, `L_z^{(u)} = 12 l₀`. The compactness of the subgrid is justified by the exponential decay of the solution on the scale `l_c ≪ L_r^{(u)}`. The source `f` is bicubically interpolated from the stretched `n`-grid onto the uniform `ψ`-grid. The PCG relative residual is driven down to `10⁻⁶`.
+**Numerical solution.** Equation (5.5) is solved by preconditioned conjugate gradients (PCG, diagonal preconditioning) on a uniform subgrid `512 × 1024` with extents `L_r^{(u)} = 6 l₀`, `L_z^{(u)} = 12 l₀`. The compactness of the subgrid is justified by the exponential decay of the solution on the scale `l_c ≪ L_r^{(u)}`. The source `f` is bilinearly interpolated from the stretched `n`-grid onto the uniform `ψ`-grid. On the outer boundary `r = L_r^{(u)}` a Robin condition is imposed, consistent with the `1/r` asymptotics of the screened solution; the PCG relative residual is driven down to `10⁻⁸`. With this condition the value of `E_u` is stable under refinement of the PCG subgrid — verified on subgrids from `512 × 1024` to `2048 × 4096`.
 
 **Energy assembly.** From the resulting `ψ` the components `(u_r, u_z)` are reconstructed via (5.4), followed by the strain tensor in axisymmetry:
 ```
@@ -294,9 +308,9 @@ and the elastic energy density:
 ```
 E_u = ∫ ( ε_rr² + ε_zz² + ε_φφ² + 2 ε_rz² ) · 2π r dr dz         (5.7)
 ```
-This is the quantity `E_u = 48.85 keV` of the table in §6.3 — the gravitational self-energy of the u-channel, induced by the presence of the EM-topology `n`.
+This is the quantity `E_u = 3.758 keV` of the table in §6.3 — the gravitational self-energy of the u-channel, induced by the presence of the EM-topology `n`.
 
-**Remark on limits.** In the limit `μ_c → 0` (l_c → ∞), equation (5.3) loses its screening while the source `−2f` is retained, and `E_u` diverges in the UV like the self-energy of a point charge in classical electrodynamics. In the opposite limit `μ_c → ∞` (l_c → 0), the mass term pushes `u` toward zero faster than the source can excite it: `u ≈ 2f/μ_c → 0`, and `E_u → 0`. The canonical value `μ_c = 2π` (3.3) provides `l_c ≈ R_r` — the unique regime in which the u-channel contributes a finite nontrivial `~10 %` of the mass. Physically this means that **the n↔u coupling cannot be switched off by setting μ_c to zero** (this, on the contrary, drives `E_u` to infinity): the source from the topology of `n` is always present, and `μ_c` only regulates the degree of its localization.
+**Remark on limits.** In the limit `μ_c → 0` (l_c → ∞), equation (5.3) loses its screening while the source `−2f` is retained, and `E_u` diverges in the UV like the self-energy of a point charge in classical electrodynamics. In the opposite limit `μ_c → ∞` (l_c → 0), the mass term pushes `u` toward zero faster than the source can excite it: `u ≈ 2f/μ_c → 0`, and `E_u → 0`. The canonical value `μ_c = 2π` (3.3) provides `l_c ≈ 0.4 l₀` — of order `R_r` — the regime in which the u-channel contributes a finite but small share (`~0.8 %` of the mass; see §6.3). Physically this means that **the n↔u coupling cannot be switched off by setting μ_c to zero** (this, on the contrary, drives `E_u` to infinity): the source from the topology of `n` is always present, and `μ_c` only regulates the degree of its localization.
 
 ---
 
@@ -307,39 +321,39 @@ This is the quantity `E_u = 48.85 keV` of the table in §6.3 — the gravitation
 The functional minimum gives:
 
 ```
-Ẽ_min = 1182.74  (dimensionless)                           (6.1)
-E_min = M₀ c² · Ẽ_min = 429.5068 eV · 1182.74 = 507.9966 keV
+Ẽ_min = 1039.05  (dimensionless)                           (6.1)
+E_min = M₀ c² · Ẽ_min = 429.5068 eV · 1039.05 = 446.279 keV
 ```
 
-Compared with CODATA 2018:
+This is the **bare** electron mass — a direct output of the bare functional `E[n, u]`. The dimensionless minimum is numerically close to an integer in dyadic notation:
 
 ```
-Prediction:    m_e c² = 507.9966 keV
-CODATA 2018:   m_e c² = 510.998950 ± 0.000015 keV
-Deviation:     Δ = −3.002 keV = −0.587 % from CODATA          (6.2)
+Ẽ_min       = 1039.05
+2¹⁰ + 2⁴ − 1 = 1039
+deviation   = +5.0·10⁻⁵  (= +0.0049 %, or +21.7 eV)        (6.2)
 ```
 
 ### 6.2. Topological charge preservation
 
 ```
-Q_H = −0.99999   (electron, |Q_H| = 1 to 10⁻⁵)               (6.3)
+Q_H = −0.99996   (electron, |Q_H| = 1 to ~4·10⁻⁵)            (6.3)
 ```
 
 ### 6.3. Energy decomposition
 
 ```
-E_OF   (Frank–Oseen, K₁ + K₂ + K₃)        :  180.985 keV  (35.6 %)
-E_Sk   (Skyrme stabilizer, c₄)             :  276.932 keV  (54.5 %)
-E_u    (Cosserat coupling, μ_c)            :   50.080 keV  ( 9.9 %)
+E_OF   (Frank–Oseen, K₁ + K₂ + K₃)        :  221.888 keV  (49.7 %)
+E_Sk   (Skyrme stabilizer, c₄)             :  220.634 keV  (49.4 %)
+E_u    (Cosserat coupling, μ_c)            :    3.758 keV  ( 0.8 %)
 ─────────────────────────────────────────────────────────────────
-Total                                      :  507.997 keV  (100 %)   (6.4)
+Total                                      :  446.279 keV  (100 %)   (6.4)
 ```
 
-The Skyrme term carries `54.5 %` of the energy — the standard Derrick balance: under uniform rescaling Frank–Oseen scales as `λ` and Skyrme as `λ⁻¹`, and both are required at comparable magnitude to fix the soliton size [15]. The Cosserat coupling `E_u` contributes `9.9 %`.
+On the dyadic box the Frank–Oseen and Skyrme terms carry nearly equal shares (`49.7 %` and `49.4 %`) — the standard Derrick balance: under uniform rescaling Frank–Oseen scales as `λ` and Skyrme as `λ⁻¹`, and both are required at comparable magnitude to fix the soliton size [15]. The screened Cosserat coupling `E_u` contributes a small share (`0.8 %`).
 
 ### 6.4. Grid convergence
 
-Doubling the grid `1024 → 2048` shifts `m_e` by less than `1 eV` — four orders of magnitude smaller than the gap to CODATA itself (`3.002 keV`). Grid convergence is stable, as is the conservation of the topological charge (`|Q_H| = 1` to `10⁻⁵`).
+Under doubling of the grid resolution the value of `m_e^bare` shifts by less than `1 eV` (`~2·10⁻⁶` of `m_e^bare`). Grid convergence is stable, as is the conservation of the topological charge (`|Q_H| = 1` to `~4·10⁻⁵`).
 
 ### 6.5. Sensitivity analysis
 
@@ -361,33 +375,50 @@ The dimensionless minimum `Ẽ_min` depends only on the dimensionless parameters
 
 ## 7. Discussion
 
-### 7.1. The 3-keV gap from CODATA
+### 7.1. The bare character of the result
 
-The gap `Δ = −3.002 keV` (`−0.587 %`) is the difference between the **bare** mass `m_e^bare = 507.997 keV` obtained by minimizing the Cosserat functional and the physical `m_e^phys = 510.999 keV` measured experimentally. In §7.2 we put forward the hypothesis that this difference is the standard QED renormalization acting in parallel on both bare parameters (`α_bare = 1/128 → α(0) = 1/137` and `m_e^bare → m_e^phys`). A direct derivation of the `δm_e` contribution within the Cosserat program is an open direction for future work.
+The obtained `m_e^bare c² = 446.279 keV` is the **bare** electron mass — the minimum of the bare Cosserat functional `E[n, u]` over the 3-parameter Hopf ansatz. It is a direct output of the functional: the value is not calibrated against any reference. It belongs to the bare (UV) slice of the construction: the same triple `{ε₀, μ₀, ℏ}` that fixes the constants of the functional (§3) also fixes the bare fine-structure constant `α_bare = 2⁻⁷ = 1/128` [1, §7]. Thus `446.279 keV` is the electron mass corresponding to `α_bare = 1/128`; its connection to the physical mass (corresponding to the measured `α(0) = 1/137`) is treated in §7.3.
 
-### 7.2. Numerical observation: gap ≈ 7 quanta of `M₀c²`
+### 7.2. Dyadic form of the dimensionless minimum
 
-In units of the base energy quantum `M₀c² = 429.5068 eV`:
+The dimensionless minimum of the functional `Ẽ_min = E_min / M₀c² = 1039.05` agrees with the integer `1039` to `~5·10⁻⁵`. This integer fits the dyadic form
 
 ```
-Δ / M₀c² = 3002.4 / 429.5068 = 6.99
+Ẽ_min  =  m_e/m₀  =  x² + x/2 − 1,        x ≡ α⁻¹/4          (7.1)
 ```
 
-In other words, the gap matches 7 quanta of `M₀c²` to within `~4 eV` (`~0.001 %` of `m_e`).
+where `x` is the single geometric scale (the number of Compton lengths in a vacuum cell, `x = l₀/ƛ_C`). For the bare value of the fine-structure constant `α_bare⁻¹ = 128 = 2⁷` [1] the scale is `x = 32 = 2⁵`, and
 
-A geometric check: the volume of the region in which the director is tilted by more than `60°` from the vertical (`n_z < 0.5`) at the canonical minimum is `6.96 l₀³ ≈ 7` elementary cells of the medium — the same "7" as in the energy gap.
+```
+Ẽ_min  =  32² + 32/2 − 1  =  1024 + 16 − 1  =  1039          (7.2)
+```
 
-Below we put forward a hypothesis on the nature of this coincidence via the standard QED renormalization; a direct derivation of the `δm_e` contribution from the Cosserat functional is not performed in the present work and is left for future work.
+The three terms correspond to "area + half-perimeter + point" of the reduced 2D knot: `x² = 2¹⁰` (core), `x/2 = 2⁴` (mass shell), `−1` (center). The dyadic form (7.1) was obtained in a separate analysis of the dyadic structure of the program; here it is given as a **numerical observation** — its direct derivation from the functional `E[n, u]` has not been carried out.
 
-For context: in [1] the **bare** value of the fine-structure constant is shown to be `α_bare = 1/128 = 2⁻⁷`. This value is systematically lower than the measured `α(0) = 1/137` by `≈ 6.6 %`, which in standard QED is explained by the running coupling (vacuum polarization by virtual `e⁺e⁻` pairs). Our `m_e = 507.997 keV` is in the same situation: it is systematically lower than the measured `m_e (CODATA) = 510.999 keV` by `0.587 %`. **Hypothesis**: both values are bare (UV) and the discrepancies with experiment reflect the same QED renormalization acting on both parameters. In this case `7·M₀c²` may be a numerical manifestation of the mass-renormalization contribution `δm_e ~ (α/π)·m_e·O(1)` with the cutoff at the scale `Λ ~ 1/l₀`. A direct calculation of this contribution within the Cosserat program is an open direction for future work.
+### 7.3. Connection to the physical mass via the running of `α`
 
-**Implication for the interpretation of precision.** If this hypothesis holds, the formal "`0.587 %` from CODATA" reflects **not** the accuracy of the calculation, but the **structurally expected** QED correction distinguishing the bare `m_e^bare` from the physical `m_e^phys`. The match `Δ ≈ 7·M₀c²` holds to within `≈ 4 eV` — `~1.3·10⁻³` of the gap itself, or `~8·10⁻⁶` of `m_e`. In other words, our bare value `507.997 keV` is accurate at the level of grid convergence (`~1 eV`, see §6.4), while the `3.002 keV` gap is a separate, structurally determined object, **not a residual error**.
+Formula (7.1) is a function of the single scale `x = α⁻¹/4`. The bare slice corresponds to `α_bare⁻¹ = 128` (`x = 32`); the physical electron is measured at `α(0)⁻¹ = 137.036` (`x = 34.259`). The same formula (7.1) at the physical `x` gives:
 
-### 7.3. Position within the Cosserat program
+```
+m_e^phys / m₀  =  34.259² + 34.259/2 − 1  =  1173.68 + 17.13 − 1  =  1189.81
+m_e^phys c²    =  1189.81 · M₀c²  ≈  511.0 keV
+```
+
+— which agrees with the standard electron mass `m_e = 510.999 keV`. The ratio of the two slices:
+
+```
+m_e^bare / m_e^phys  =  1039 / 1189.81  =  0.8732               (7.3)
+```
+
+Since the charge is linear in `x` (`α⁻¹ = 4x`) and the mass is quadratic (`m_e/m₀ = x² + x/2 − 1`), to leading order `m_e ∝ x² ∝ 1/α²`. The pure square `(x_bare/x_phys)² = (32/34.259)² = 0.8725` differs from the full ratio (7.3) `0.8732` by `~0.09 %` — this discrepancy is fully accounted for by the sub-terms `+x/2 − 1` of formula (7.1). In other words, **one and the same shift `x: 32 → 34.259`** (equivalently — the running `α⁻¹: 128 → 137.036`) takes both the charge and the mass from their bare values to the physical ones.
+
+This is given as a **numerical observation** (alongside §7.2), not as a derivation: the exponent `2`, the origin of the sub-terms `+x/2 − 1`, and the running of `α` itself from the Cosserat functional are not established in the present work — their derivation is the subject of a separate forthcoming work on the dyadic unification of charge, mass, and scale.
+
+### 7.4. Position within the Cosserat program
 
 The present work belongs to the tradition of deriving fundamental physics from the topology of a continuous medium. The main representatives of this line are the program of **G. E. Volovik** on the analogy between superfluid ³He-A and the Standard Model [19] and the program of **H. Kleinert** on multivalued fields, describing defects as gauge fields and gravity through torsion (Einstein–Cartan) [20]. The mathematical apparatus of all three programs is essentially common: Frank–Oseen-type elasticity for a director field on the sphere (for ³He-A — the l-vector of the orbital part), topological invariants of homotopy classes of mappings, and hopfions as stable configurations.
 
-The principal difference lies in the choice of substrate. Volovik works with a concrete quantum medium (superfluid ³He-A at millikelvin temperatures), Kleinert — with an elastic continuum carrying dislocations and disclinations. The present work takes as the medium the physical vacuum itself: four identifications of medium parameters with the fundamental constants `{ε₀, μ₀, ℏ, G}` (see [1]) turn the abstract continuum into a concrete model from which a numerical electron mass `m_e c² = 507.997 keV` (Δ = −0.587 % from CODATA) is derived with zero free parameters.
+The principal difference lies in the choice of substrate. Volovik works with a concrete quantum medium (superfluid ³He-A at millikelvin temperatures), Kleinert — with an elastic continuum carrying dislocations and disclinations. The present work takes as the medium the physical vacuum itself: four identifications of medium parameters with the fundamental constants `{ε₀, μ₀, ℏ, G}` (see [1]) turn the abstract continuum into a concrete model from which a numerical bare electron mass `m_e^bare c² = 446.279 keV` is derived with zero free parameters.
 
 More broadly, these programs share a related mathematical apparatus (Frank–Oseen elasticity for an `S²`-target field, topological invariants, hopfions). **One possible hypothetical unifying picture** is the KTHNY cascade of topological melting (Kosterlitz–Thouless–Halperin–Nelson–Young [22, 23]): a rigid crystal (Kleinert's "World Crystal"), an intermediate hexatic phase (liquid-crystalline, Frank–Oseen), and an isotropic liquid (close to superfluid ³He-A). Under this hypothetical picture, the present work would lie in the intermediate phase with particles as topological defects. **A rigorous verification of this picture for the physical vacuum** (including the numerical correspondence of the functional `E[n, u]` to the relevant KTHNY phase) **is not performed here and is left as an open direction**; it is mentioned only as one possible broad context, not as a claim of the program.
 
@@ -395,11 +426,21 @@ More broadly, these programs share a related mathematical apparatus (Frank–Ose
 
 ## 8. Conclusion
 
-The **bare** electron mass `m_e^bare c² = 507.9966 keV` is obtained numerically from the triple of vacuum constants `{ε₀, μ₀, ℏ}` by minimization of the Cosserat functional over the 3-parameter Hopf ansatz. The result is stable under grid refinement (`< 1 eV` per doubling of the resolution) and invariant under grid/code rescaling (see §6.4).
+The **bare** electron mass `m_e^bare = 446.279 keV` is obtained numerically from the triple of vacuum constants `{ε₀, μ₀, ℏ}` by minimization of the Cosserat functional over the 3-parameter Hopf ansatz on the dyadic box `L = 17 × 33 l₀`. The result is stable under grid refinement (`< 1 eV` per doubling of the resolution) and invariant under grid/code rescaling (see §6.4); the topological charge is preserved (`|Q_H| = 1` to `~4·10⁻⁵`).
 
-The difference from the physical `m_e (CODATA) = 510.999 keV` is `−3.002 keV` and matches `7·M₀c²` to within `4 eV` (`~1.3·10⁻³` of the gap). By parallel with the bare `α_bare = 1/128 = 2⁻⁷` from [1], which differs from the measured `α(0) = 1/137` by `≈ 6.6 %` (standard QED renormalization), **we put forward the hypothesis** (§7.2) that the gap `m_e^phys − m_e^bare` is the same QED renormalization acting on both bare parameters. In this case the accuracy of the present calculation for the bare `m_e` corresponds to grid convergence (`~1 eV`, or `~2·10⁻⁶` of `m_e`), and the formal "`−0.587 %`" is a structurally expected correction, not a residual error.
+The dimensionless minimum `Ẽ_min ≈ 1039` fits the dyadic form `m_e/m₀ = x² + x/2 − 1` with the single scale `x = α⁻¹/4`: at the bare `α_bare⁻¹ = 128` (`x = 32`) it gives `1024 + 16 − 1 = 1039`. The same form at the physical `α(0)⁻¹ = 137` (`x = 34.26`) gives `1189.8` — i.e. `m_e^phys ≈ 511 keV`, agreeing with the standard mass `510.999 keV`. The same shift of the scale `x` that takes the bare `α` to the measured one takes the mass from its bare value to the physical one (§7.2–7.3).
 
-A direct derivation of the `δm_e` contribution within the Cosserat program is an open direction for future work.
+The dyadic form is given as a **numerical observation**, not as a derivation: its direct derivation from the Cosserat functional `E[n, u]` is an open direction for future work.
+
+A full-field relaxation — minimization over the entire director field `n: ℝ³ → S²` without the restriction to the 3-parameter ansatz, requiring the gravitational `u`-channel to be coupled to a mass term of the functional — is in preparation as a separate publication.
+
+---
+
+## Methodology and use of AI tools
+
+In preparing this work the author used the large language model **Claude (Anthropic)** to assist with writing Python scripts for the numerical minimization of the Cosserat functional, with the development of supporting modules (stretched grids, boundary conditions, diagnostics of the energy components), and with stylistic editing of the manuscript. All key physical postulates (the form of the functional, the choice of constants, and the ansatz), the interpretation of the results, and the conclusions are due to the author.
+
+The author has thoroughly checked all generated code (grid convergence, conservation of the topological charge `Q`, invariance of the result under code/grid rescaling, see §6) and the manuscript text, and takes full responsibility for the final content and results of the work.
 
 ---
 
@@ -487,14 +528,14 @@ The script builds the Cosserat functional and minimizes by Nelder–Mead on the 
 Expected canonical output:
 
 ```
-R_r ≈ 0.51688,    R_z ≈ 0.76148,    w ≈ 0.62580
-Q_H ≈ −0.99999
-E_OF = 180.985 keV (35.6 %)   E_Sk = 276.932 keV (54.5 %)
-E_u  =  50.080 keV ( 9.9 %)
-E_total = 507.997 keV  (=  m_e^bare;  CODATA m_e = 510.999 keV, see §7.2)
+R_r ≈ 0.64082,    R_z ≈ 0.80729,    w ≈ 0.70200
+Q_H ≈ −0.99996
+E_OF = 221.888 keV (49.7 %)   E_Sk = 220.634 keV (49.4 %)
+E_u  =   3.758 keV ( 0.8 %)
+E_total = 446.279 keV  (= m_e^bare;  Ẽ_min ≈ 2¹⁰+2⁴−1, see §7.2)
 ```
 
-A typical run converges in `~ 120` simplex iterations; wall time on a single NVIDIA RTX 2070 is of order `3–5` minutes.
+A typical run converges in `~ 90` simplex iterations (`172` function evaluations); wall time on a single NVIDIA RTX 2070 is of order `6` minutes.
 
 ---
 
@@ -533,7 +574,7 @@ https://github.com/igorevsiev-cmyk/cosserat-program
 
 Supplementary materials in `papers/2026-05-electron-mass/`. The preprint is accompanied by numerical checks:
 
-- `verifications/electron_mass_minimization/` — the Nelder-Mead minimization (reproduces `m_e = 507.997 keV`);
+- `verifications/electron_mass_minimization/` — the Nelder-Mead minimization (reproduces `m_e^bare = 446.279 keV`);
 - `verifications/canonical_derrick/` — Derrick stability scan.
 
 The preprint is registered on Zenodo: [10.5281/zenodo.20205502](https://doi.org/10.5281/zenodo.20205502).

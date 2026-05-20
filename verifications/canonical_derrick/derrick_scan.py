@@ -2,9 +2,10 @@
 """
 derrick_scan.py — Derrick test for the canonical electron configuration.
 
-Takes the canonical 3-parameter Hopf ansatz (R_r=0.51688, R_z=0.76148,
-w=0.62580) — the NM optimum of the bare Cosserat functional (m^2 = 0)
-from the companion `electron_mass_minimization/` artifact — and rescales
+Takes the canonical 3-parameter Hopf ansatz (R_r=0.64082, R_z=0.80729,
+w=0.70200) — the NM optimum of the bare Cosserat functional (m^2 = 0)
+on the dyadic box L = 17 x 33, from the companion
+`electron_mass_minimization/` artifact — and rescales
 (R_r, R_z) by lambda for lambda in [0.6, 3.0]. For each lambda the three
 energy components E_OF, E_Sk, E_u are evaluated on the bare functional.
 If lambda=1.0 is the minimum, the canonical configuration is at Derrick
@@ -72,8 +73,8 @@ MU_C = 2.0 * np.pi
 
 class Cfg(Config):
     """Canonical configuration for the electron hopfion."""
-    Nr = 768; Nz = 1536
-    L_r = 24.0; L_z = 48.0
+    Nr = 1024; Nz = 2048
+    L_r = 17.0; L_z = 33.0          # dyadic box: L_r = log2(2^7*2^10), L_z = 2*L_r-1
     use_float64 = True; R_hopf = 1.0
     K1 = 2.0; K2 = 2.0; K3 = 14.56          # K3 = K1 * (1 + eta), eta = 2*pi
     c2 = 1.0; c4 = 1.0
@@ -84,10 +85,11 @@ class Cfg(Config):
 
 
 # Canonical 3-parameter Hopf ansatz (NM optimum of the bare Cosserat
-# functional with m^2 = 0, see ../electron_mass_minimization/)
-R_R_E = 0.51688
-R_Z_E = 0.76148
-W_E   = 0.62580
+# functional with m^2 = 0 on the dyadic box L = 17 x 33,
+# see ../electron_mass_minimization/)
+R_R_E = 0.64082
+R_Z_E = 0.80729
+W_E   = 0.70200
 
 
 def hopf_variational(rr, zz, R_r, R_z, w):

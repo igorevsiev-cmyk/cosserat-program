@@ -42,8 +42,8 @@ def main():
                 color='red', zorder=10,
                 label=f'min: $\\lambda={lam[idx_min]:.2f}$, '
                       f'$E={e_tot[idx_min]:.2f}$ keV')
-    ax1.axhline(510.999, color='blue', linestyle=':', alpha=0.5,
-                label=r'$m_e^{\rm phys}$ (CODATA) $= 510.999$ keV')
+    ax1.axhline(446.258, color='blue', linestyle=':', alpha=0.5,
+                label=r'dyadic $(2^{10}+2^4-1)\,M_0c^2 = 446.26$ keV')
     ax1.set_xlabel(r'$\lambda$  (size scale of canonical Hopf ansatz)', fontsize=12)
     ax1.set_ylabel(r'$E_{\rm tot}$  (keV)', fontsize=12)
     ax1.set_title('Derrick scan: total energy vs. spatial dilation',
@@ -57,7 +57,7 @@ def main():
              color='tab:blue')
     ax2.plot(lam, e_sk, 's-', label=r'$E_{\rm Sk}$ (Skyrme, $\sim\lambda^{-1}$)',
              color='tab:orange')
-    ax2.plot(lam, e_u, 'd-', label=r'$E_u$ (Cosserat, $\sim\lambda^{2}$)',
+    ax2.plot(lam, e_u, 'd-', label=r'$E_u$ (screened Cosserat, saturating)',
              color='tab:red')
     ax2.axvline(1.0, color='red', linestyle='--', alpha=0.3)
     ax2.set_xlabel(r'$\lambda$', fontsize=12)

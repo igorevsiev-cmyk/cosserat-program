@@ -11,10 +11,9 @@ A two-channel Cosserat-continuum interpretation of electromagnetism and gravitat
 
 ## Files
 
-- `PAPER_2026_05_12_SI_REDUCTION_COSSERAT.md` — main paper (English)
-- `PAPER_2026_05_12_SI_REDUCTION_COSSERAT_RU.md` — Russian original
-
-PDF versions will be added after final DOI assignment.
+- `PAPER_SI_REDUCTION_COSSERAT.md` — main paper (English)
+- `PAPER_SI_REDUCTION_COSSERAT_RU.md` — Russian original
+- typeset PDF versions (RU + EN) in this folder
 
 ## Key results
 
@@ -27,7 +26,7 @@ PDF versions will be added after final DOI assignment.
 
 ## Supplementary verifications
 
-- [`../../verifications/canonical_derrick/`](../../verifications/canonical_derrick/) — Derrick scan of the full canonical functional (§7.3): confirms `λ = 1` is the energy minimum, with `m_e = 510.93 keV` (Δ = 0.014 % from experiment) and `Q` preserved across the scan.
+- [`../../verifications/canonical_derrick/`](../../verifications/canonical_derrick/) — Derrick scan of the full canonical functional (§7.3): confirms `λ = 1` is the energy minimum, with the bare electron mass `m_e^bare = 446.279 keV` (dyadic box `17 × 33 l₀`) and `Q` preserved across the scan.
 
 ## Citation
 

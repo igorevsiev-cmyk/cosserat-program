@@ -19,8 +19,8 @@
   "grid": {
     "Nr": 1024,
     "Nz": 2048,
-    "L_r": 24.0,
-    "L_z": 48.0,
+    "L_r": 17.0,
+    "L_z": 33.0,
     "beta_r": 6.0,
     "beta_z": 3.0,
     "r_focus": 1.0,
@@ -36,35 +36,35 @@
     ],
     "xatol": 1e-06,
     "fatol_keV": 0.0001,
-    "iterations": 161,
-    "nfev": 161,
+    "iterations": 172,
+    "nfev": 172,
     "success": true,
     "message": "Optimization terminated successfully.",
-    "wall_time_s": 248.79250526428223,
+    "wall_time_s": 353.11606311798096,
     "device": "cuda"
   },
   "optimum": {
-    "R_r": 0.5168765652133356,
-    "R_z": 0.7614764679192181,
-    "w": 0.6258045117049007
+    "R_r": 0.6408160149362525,
+    "R_z": 0.8072875518184682,
+    "w": 0.7019955806536682
   },
   "energy_decomposition_keV": {
-    "E_OF": 180.98488789199362,
-    "E_Sk": 276.9316247995738,
-    "E_u": 50.08004384441872,
-    "E_total": 507.9965565359862
+    "E_OF": 221.88762383285322,
+    "E_Sk": 220.6336421747573,
+    "E_u": 3.7579612196779055,
+    "E_total": 446.27922722728846
   },
   "topological_charge": {
-    "Q": -0.9999912630233457,
-    "abs_Q": 0.9999912630233457,
-    "deviation": 8.736976654266648e-06
+    "Q": -0.9999562176981376,
+    "abs_Q": 0.9999562176981376,
+    "deviation": 4.378230186241616e-05
   },
-  "comparison_with_CODATA_2018": {
-    "predicted_m_e_bare_keV": 507.9965565359862,
-    "codata_m_e_phys_keV": 510.99895,
-    "gap_keV": 3.002393464013778,
-    "gap_eV": 3002.393464013778,
-    "gap_relative_pct": 0.587553744291212,
-    "interpretation": "bare m_e from Cosserat functional; CODATA is the physical (renormalized) m_e; the gap is interpreted as standard QED renormalization (see paper \u00a77.2)"
+  "dyadic_closed_form": {
+    "predicted_m_e_bare_keV": 446.27922722728846,
+    "dyadic_N": 1039,
+    "dyadic_formula": "(2^10 + 2^4 - 1) * M0 c^2",
+    "dyadic_m_e_bare_keV": 446.2575596646312,
+    "deviation_pct": 0.004855274525041,
+    "interpretation": "bare m_e from the Cosserat functional on the dyadic box L=17x33; the NM optimum matches the dyadic closed form (2^10 + 2^4 - 1) * M0 c^2 (no comparison with CODATA -- this is the bare value)"
   }
 }
