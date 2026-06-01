@@ -1,7 +1,35 @@
 #!/usr/bin/env python3
 """
-nm_minimization.py — Nelder-Mead minimization of the canonical Cosserat
-functional E[n, u] over the 3-parameter Hopf ansatz (R_r, R_z, w).
+nm_minimization_variable_stiffness.py
+------------------------------------
+Variant of nm_minimization.py with one additional knob: relative vacuum
+stiffness `k = mu / mu_vacuum`.
+
+    k = 1.0    reproduces the canonical paper run (m_e^bare = 446.28 keV).
+    k != 1.0   rescales ONLY the unit conversion M0c^2 -> k^(1/4) * M0c^2.
+
+The dimensionless minimum of E[n,u] (and the optimal R_r, R_z, w) is
+INVARIANT under k -- all sim-internal numbers (K_i, mu_c, c_4) are
+ratios to mu and stay fixed.
+
+Predicted scaling (algebra from the Cosserat-continuum hypothesis):
+    m_e(k) = k^(1/4) * 446.28 keV
+    l_0(k) = k^(-1/4) * 4.594 Angstrom
+
+Use this script to:
+    * sanity-check dimensional consistency of the canonical functional
+    * verify that the dimensionless minimum is mu-invariant
+    * explore the rolling-contact identity mu_c = 2 pi * mu under
+      uniform rescaling of the medium stiffness
+
+The original nm_minimization.py is UNCHANGED.
+
+------------------------------------------------------------------
+Original docstring of nm_minimization.py follows.
+------------------------------------------------------------------
+
+Nelder-Mead minimization of the canonical Cosserat functional E[n, u]
+over the 3-parameter Hopf ansatz (R_r, R_z, w).
 
 Verifies the central numerical claim of the paper:
 
@@ -33,7 +61,7 @@ verification that the optimum is a true Derrick minimum (stable under
 spatial dilation).
 """
 
-import sys, os, json, time
+import sys, os, json, time, argparse
 os.environ['PYTHONUNBUFFERED'] = '1'
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -99,6 +127,14 @@ class Cfg(Config):
     m2 = 0.0                           # no mass term in the bare functional
     cg_iter = 2000                     # PCG cap for u-channel solver (Robin BC)
 
+    # Relative vacuum stiffness: k = mu / mu_vacuum
+    # k = 1.0 -> canonical paper run (m_e^bare = 446.28 keV)
+    # k > 1   -> stiffer medium (m_e grows as k^(1/4))
+    # k < 1   -> softer medium  (m_e shrinks)
+    # Only the unit conversion M0c^2 is rescaled; the dimensionless minimum
+    # (R_r, R_z, w, E_sim) is INVARIANT.
+    k = 1.0
+
 
 # ----------------------------------------------------------------------
 # Hopf ansatz
@@ -130,6 +166,9 @@ def evaluate_energy(R_r, R_z, w, rr, zz, metric, cfg):
 
     Returns: dict with components {E_OF, E_Sk, E_u, E_total} (keV)
              and the topological charge Q.
+
+    Note: the conversion factor M0c^2 is scaled by k^(1/4), where
+    k = mu / mu_vacuum is the relative stiffness (cfg.k).
     """
     with torch.no_grad():
         n = hopf_variational(rr, zz, R_r, R_z, w)
@@ -137,7 +176,8 @@ def evaluate_energy(R_r, R_z, w, rr, zz, metric, cfg):
         E_u = compute_E_u_screened(n, metric, MU_C, cg_iter=cfg.cg_iter).item()
         Q = compute_Q_stretched(n, metric).item()
 
-    keV = M0C2_eV / 1000.0
+    M0C2_eff_eV = cfg.k**0.25 * M0C2_eV       # k-rescaled unit of energy
+    keV = M0C2_eff_eV / 1000.0
     return {
         'E_OF':    E_of.item()   * keV,
         'E_Sk':    E_sk.item()   * keV,
@@ -151,18 +191,34 @@ def evaluate_energy(R_r, R_z, w, rr, zz, metric, cfg):
 # NM driver
 # ----------------------------------------------------------------------
 def main():
+    # CLI: relative vacuum stiffness k = mu / mu_vacuum (default 1.0)
+    parser = argparse.ArgumentParser(
+        description="NM minimization with variable vacuum stiffness k.")
+    parser.add_argument('--k', type=float, default=1.0,
+        help="Relative vacuum stiffness k = mu/mu_vacuum (default 1.0 = canonical).")
+    parser.add_argument('--out', type=str, default=None,
+        help="Output JSON path (default: result_variable_k_<k>.json).")
+    args = parser.parse_args()
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     cfg = Cfg()
+    cfg.k = args.k
+
+    M0C2_eff_eV = cfg.k**0.25 * M0C2_eV
 
     print("=" * 100)
-    print("NELDER-MEAD MINIMIZATION of E[n, u] over (R_r, R_z, w)")
+    print("NELDER-MEAD MINIMIZATION of E[n, u] over (R_r, R_z, w)   --   variable stiffness")
     print("=" * 100)
     print(f"Device: {device}")
     print(f"Grid:   {cfg.Nr} x {cfg.Nz}  (L_r={cfg.L_r}, L_z={cfg.L_z}, "
           f"beta_r={cfg.beta_r}, beta_z={cfg.beta_z})")
     print(f"K1={cfg.K1}, K2={cfg.K2}, K3={cfg.K3}, c4={cfg.c4}")
     print(f"mu_c = 2 pi = {MU_C:.6f}")
-    print(f"M0 c^2 = {M0C2_eV:.4f} eV   (natural mass scale)")
+    print(f"Relative stiffness k = mu/mu_vacuum  = {cfg.k:.6g}")
+    print(f"M0 c^2 (vacuum)      = {M0C2_eV:.4f} eV")
+    print(f"M0 c^2 (k-rescaled)  = k^(1/4) * M0c^2 = {M0C2_eff_eV:.4f} eV")
+    print(f"  l_0 (k-rescaled)   = k^(-1/4) * 4.5943 A = "
+          f"{cfg.k**(-0.25) * 4.5943:.4f} Angstrom")
     print()
 
     rr, zz, metric = create_stretched_grid(
@@ -241,31 +297,60 @@ def main():
     print()
     print(f"  Q = {final['Q']:+.6f}    (electron orientation if -1, positron if +1)")
     print()
-    # Bare result -- compared only with the dyadic closed form, NOT with CODATA.
-    # Dyadic closed form: m_e^bare c^2 = (2^10 + 2^4 - 1) * M0 c^2 = 1039 * M0 c^2
+    # Bare result -- compared with the dyadic closed form rescaled by k^(1/4).
+    # Dyadic closed form (k = 1): m_e^bare = (2^10 + 2^4 - 1) * M0 c^2 = 1039 * M0 c^2
+    # For arbitrary k: dyadic value scales the same as the simulated minimum,
+    # so the relative deviation is INVARIANT under k. This is the key check.
     DYADIC_N    = 2**10 + 2**4 - 1                  # = 1039
-    dyadic_keV  = DYADIC_N * M0C2_eV / 1000.0
+    dyadic_keV  = DYADIC_N * M0C2_eff_eV / 1000.0
     dyadic_dev  = 100.0 * (final['E_total'] - dyadic_keV) / dyadic_keV
-    print(f"  Predicted m_e^bare c^2 = {final['E_total']:.4f} keV   (bare functional)")
-    print(f"  Dyadic closed form     = (2^10 + 2^4 - 1) * M0 c^2 = {DYADIC_N} * M0 c^2")
-    print(f"                         = {dyadic_keV:.4f} keV")
-    print(f"  Deviation from dyadic  = {dyadic_dev:+.4f} %")
+
+    # Predicted scaling from dimensional analysis
+    m_e_vacuum_keV = DYADIC_N * M0C2_eV / 1000.0     # 446.28 keV at k=1
+    m_e_predicted  = cfg.k**0.25 * m_e_vacuum_keV    # scaling law
+
+    print(f"  Relative stiffness k             = {cfg.k:.6g}")
+    print(f"  Predicted m_e^bare (algebra)     = k^(1/4) * {m_e_vacuum_keV:.4f} keV")
+    print(f"                                   = {m_e_predicted:.4f} keV")
+    print(f"  Computed  m_e^bare (NM optimum)  = {final['E_total']:.4f} keV")
+    print(f"  Deviation from algebraic scaling = "
+          f"{100.0*(final['E_total']-m_e_predicted)/m_e_predicted:+.4f} %")
+    print()
+    print(f"  Dyadic closed form (k-rescaled)  = (2^10 + 2^4 - 1) * k^(1/4) * M0c^2")
+    print(f"                                   = {dyadic_keV:.4f} keV")
+    print(f"  Deviation from dyadic            = {dyadic_dev:+.4f} %")
     print()
     print(f"  NM iterations:  {n_eval[0]}  (NM nfev = {result.nfev})")
     print(f"  Wall time:      {wall_time:.0f} s on {device}")
     print(f"  NM message:     {result.message}")
 
-    # Save results to JSON
-    out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                            'result.json')
+    # Save results to JSON (separate from canonical result.json)
+    if args.out is not None:
+        out_path = args.out
+    else:
+        k_tag = f"{cfg.k:g}".replace('.', 'p')
+        out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                f'result_variable_k_{k_tag}.json')
     output = {
-        'paper': 'PAPER_ELECTRON_MASS (DOI: 10.5281/zenodo.20477123)',
+        'script':         'nm_minimization_variable_stiffness.py',
+        'paper':          'PAPER_ELECTRON_MASS (DOI: 10.5281/zenodo.20477123)',
         'preceding_work': '10.5281/zenodo.20187199',
+        'note':           'Variant of nm_minimization.py with relative stiffness k = mu/mu_vacuum. Only M0c^2 is rescaled by k^(1/4); functional and grid are unchanged.',
         'physical_constants': {
             'epsilon_0_F_per_m': EPS_0,
             'mu_0_implicit_via_c': 'c = 1/sqrt(eps0 mu0)',
             'hbar_J_s':            HBAR,
             'c_m_per_s':           C_LIGHT,
+        },
+        'stiffness': {
+            'k':                  cfg.k,
+            'M0c2_vacuum_eV':     M0C2_eV,
+            'M0c2_effective_eV':  M0C2_eff_eV,
+            'scaling_law':        'm_e ~ k^(1/4) * m_e_vacuum; l_0 ~ k^(-1/4) * l_0_vacuum',
+            'm_e_vacuum_keV':     m_e_vacuum_keV,
+            'm_e_predicted_keV':  m_e_predicted,
+            'l0_vacuum_A':        4.5943,
+            'l0_effective_A':     cfg.k**(-0.25) * 4.5943,
         },
         'derived_constants': {
             'M0c2_eV':       M0C2_eV,

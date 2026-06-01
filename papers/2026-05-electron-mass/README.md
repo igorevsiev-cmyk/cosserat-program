@@ -1,6 +1,6 @@
 # Electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional minimization
 
-Preprint (2026-05-20).
+Preprint, v2 (2026-05-31).
 
 > **Derivation of the bare electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional minimization: `m_e^bare = 446.279 keV`**
 > Ihar Yeusiyevich, 2026
@@ -38,6 +38,6 @@ The present work uses those identities to fix all functional parameters and perf
 
 ## Citation
 
-- **Zenodo DOI:** [10.5281/zenodo.20205502](https://doi.org/10.5281/zenodo.20205502)
+- **Zenodo DOI:** [10.5281/zenodo.20477123](https://doi.org/10.5281/zenodo.20477123)
 - **arXiv ID:** *pending*
 - **Preceding work DOI:** [10.5281/zenodo.20187199](https://doi.org/10.5281/zenodo.20187199)

@@ -7,7 +7,7 @@ using only the three vacuum constants `{ε₀, μ₀, ℏ}` as input.
 
 This is the central numerical claim of the paper
 *Derivation of the bare electron mass from `{ε₀, μ₀, ℏ}` via Cosserat-functional
-minimization* (DOI: [10.5281/zenodo.20205502](https://doi.org/10.5281/zenodo.20205502)).
+minimization* (DOI: [10.5281/zenodo.20477123](https://doi.org/10.5281/zenodo.20477123)).
 
 ## What is verified
 
