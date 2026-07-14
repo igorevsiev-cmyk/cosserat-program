@@ -2,7 +2,7 @@
 
 **Author:** Yeusiyevich Ihar V.
 **Date:** 2026-05-12
-**Version:** 2 (preprint)
+**Version:** 2.1 (preprint; v2.1 adds Appendix C "Metrological closure, rheology of the medium, and the temperature branch", identities T18–T20, two rows of Table 6.2; the Weber dimension erratum is corrected — 2026-07-02)
 **License:** CC-BY 4.0
 
 ---
@@ -200,7 +200,7 @@ quarks < 0.1 fm (~10⁻⁶ Å, quark density)
 
 A transition "below `l₀`" is **a transition to a different Cosserat medium** (denser, with different `K_i, μ_c`), not an exit from continuum mechanics. Each level of the hierarchy is its own Cosserat medium with its own `(a, ℓ_C)`. The true limit of continuum theory itself lies at the quantum-discrete level (individual nucleons, quarks), which is outside the scope of the program presented here.
 
-The Cosserat formalism has a natural place in the general physics of media: vacuum, atomic shells, nuclei — all are described by one language with different `(a, ℓ_C, K_i, \ldots)`. The electromagnetic and gravitational phenomena in our program are a particular case of the vacuum Cosserat medium; the same methodology generalizes to other density levels (as does the ordinary theory of continuous media in materials science).
+The Cosserat formalism has a natural place in the general physics of media: vacuum, atomic shells, nuclei — all are described by one language with different `(a, ℓ_C, K_i, …)`. The electromagnetic and gravitational phenomena in our program are a particular case of the vacuum Cosserat medium; the same methodology generalizes to other density levels (as does the ordinary theory of continuous media in materials science).
 
 **Why Cosserat (and not other generalizations).** Broader extensions of elasticity are known in the literature: micromorphic media (Eringen 1964), gradient elasticity (Mindlin 1965), nonlocal elasticity. All of them contain the Cosserat sector as a **mandatory minimum**. Cosserat is the simplest model that simultaneously:
 
@@ -674,7 +674,94 @@ In this section we collect all the dimensional correspondences of the EM sector.
 | Inductance | Henry | Surface inertia | kg/m² |
 | Electric capacitance | Farad | Compliance | m²·s²/kg |
 | Electric charge | Coulomb [A·s] | Cross-sectional area of a defect | m² |
-| Magnetic flux | Weber | Momentum of a linear element | kg·m/s |
+| Magnetic flux | Weber | Mass flow rate (momentum per unit length) | kg/s |
+| Resistivity | Ohm·m | Dynamic viscosity | Pa·s = kg/(m·s) |
+| Magnetic moment | J/T | Area × circulation | m⁴/s |
+
+#### The constitutive relations `D = ε₀E` and `B = μ₀H` — elasticity and inertia of the medium
+
+Table 6.2 gives `1/ε₀ ↔ shear modulus` and `E ↔ stress` as two separate correspondences, both quantities with the dimension of Pa. It is essential that they are **not independent**: the standard SI relation connecting them,
+
+```
+D = ε₀ · E      ⟺      E = (1/ε₀) · D (6.x)
+```
+
+is, in the Cosserat picture, precisely **Hooke's law** `σ = G · γ`. The role of the dimensionless strain `γ` is played by the electric displacement `D`: from `[D] = C/m²` and the reduction `[Q] ↔ [m²]` (Section 3.5) it follows that
+
+```
+[D] ↔ m²/m² = dimensionless,
+```
+
+that is, `D` measures the fraction of the cross-sectional area "occupied" by the defect — the relative strain of the medium. Thus `E` and `1/ε₀` relate as **state** (stress) and **property** (stiffness), not as equal quantities: the coincidence of their dimensions (Pa) is a consequence of the dimensionlessness of `D`. The charge sets the strain `D`; the stiffness `1/ε₀` converts it into the tension `E`.
+
+The magnetic sector supplies the **paired** constitutive relation, but of the inertial rather than the elastic channel. From `μ₀ ↔ density ρ` and `H ↔ deformation velocity v` [m/s] (Table 6.2), the standard SI relation
+
+```
+B = μ₀ · H (6.y)
+```
+
+is, in the Cosserat picture, precisely the definition of **momentum density** `p = ρ · v`. Dimension check: `μ₀ [kg/m³] · H [m/s] = kg/(m²·s) = B` ✓. Here the "input" field is the velocity `H`, set by the free currents (`∇×H = J_free`), and the "response" is the momentum density `B`. Accordingly, the two energy densities take the places of the elastic and the kinetic ones:
+
+```
+electric   ½ε₀E² = ½ D·E   ↔  elastic potential  ½ σγ
+magnetic   ½B²/μ₀ = ½ B·H   ↔  kinetic            ½ ρv²
+```
+
+— exactly the identification from which Maxwell obtained his equations from the aether model (1861–62, see Section 3.2).
+
+**Energy transport is mechanical too.** Under the same mapping, the Poynting vector `S = E × H` is the **flux of elastic power** `σ·v` (stress × particle velocity) — the intensity of an acoustic wave `[W/m²]`. The vector character is essential: the wave is transverse (`σ`, `v` lie in the wavefront plane), so the energy flows `⊥` to both — along `S`. Conjugately, the field momentum density `g = ε₀ E×B = S/c²` corresponds to `σv/c²`, consistent with `B ↔ ρv`.
+
+**All four Maxwell equations are not postulates of the medium but its theorems.** The rigorous derivation is given in the companion paper "Maxwell's Equations as Theorems about the Director Field `n: ℝ³·¹ → S²`": from the pullback of the area form `F_μν = n·(∂_μn × ∂_νn)`, the **homogeneous** pair (`∇·B = 0`, Faraday) is the **Bianchi identity** — a consequence of the two-dimensionality of the sphere of directions; the **inhomogeneous** pair (`∇·E = ρ`, Ampère) is a **Leibniz identity** that itself computes the source current (the charge being topological and integer-valued). In the mechanical dictionary the same two groups read transparently:
+
+```
+homogeneous   (∇·B = 0, Faraday)  →  structural;  in particular
+              ∇·B = 0  ↔  ∇·(ρv) = 0 — incompressibility of the inertial channel
+inhomogeneous (∇·E = ρ, Ampère)   →  carries the source:  the charge ρ = topological
+              defect (winding of the director) = source of the strain D
+```
+
+The two pictures are consistent. `∇·B = 0` is simultaneously the Bianchi identity (the internal orientation space is not `S³`) and the incompressibility of the flow `∇·(ρv) = 0`; a magnetic monopole is forbidden — it would violate the two-dimensionality of the sphere **and** would be a source of mass. The source charge `∇·E = ρ` is a topological defect of the director. The mechanical dictionary supplies the imagery; the rigorous status — "Maxwell's equations are identities, not laws" — is established in the other paper.
+
+**Another, mechanical view.** The same four equations admit a transparent aether reading: with `E ↔ σ` (stress) and `B ↔ ρv` (momentum), Faraday `∇×E = −∂B/∂t` looks like a force balance, and Ampère `∇×H = ∂D/∂t` like kinematic compatibility. This is illustrative optics, not a derivation.
+
+The reason is simple — **the sphere**. The electromagnetic field is the area on the sphere of directions "swept" by the arrow `n` when shifted along two axes: `F = n·(∂n × ∂n)`. Swap the axes — the sign flips (cross product): so `F` measures the **twist** of the arrow field, not its stretch. That is why two fields `E` and `B` appear, and why the equations are curl equations. And half of Maxwell (`∇·B = 0` and Faraday's law) holds automatically — solely because the sphere of directions is two-dimensional (companion paper, Theorem 1).
+
+**The free field is an oscillator of the medium.** The same two energy densities (elastic `½σγ` and kinetic `½ρv²`) pour into each other: the free field is a **harmonic oscillator** of the medium, and light is its travelling transverse wave (`ω = ck`). Maxwell's **displacement current** `∂D/∂t = ∂γ/∂t` is the elastic ("spring") term: the *rate of strain*, not a transport of charge; its lumped limit is the `LC` circuit (capacitor = spring, coil = mass, `ω = 1/√(LC)`).
+
+As a result, the three central consequences of the mechanical picture turn out to be facets of one structure. Hooke's law `D = ε₀E` (elasticity, `σ = Gγ`) and the momentum relation `B = μ₀H` (inertia, `p = ρv`) are the **constitutive** relations of one and the same Cosserat medium along its two channels; and their ratio yields the **dynamical** consequence — Maxwell's formula for the transverse wave speed
+
+```
+c² = (1/ε₀)/μ₀ = G/ρ,
+```
+
+that is, `c_T = √(G/ρ) ≡ c_light` (Section 2). Elasticity, inertia, and propagation speed are not three independent identifications but three projections of a single mechanics of the medium. The plane wave confirms that this is a **dispersionless** elastic wave: `H = cD` (since `H = B/μ₀ = cε₀E = cD`) reads in the dictionary as `v = c·γ` — particle velocity `= c ×` strain, the exact signature of a travelling profile `u = f(x − ct)`.
+
+**The converse reading: `1/ε₀ = μ₀c²` and the rest energy.** The exact SI identity `1/ε₀ = μ₀c²` (a consequence of `c² = 1/(ε₀μ₀)`) reads in the mechanical dictionary as
+
+```
+G = ρ c²                                              (6.z)
+```
+
+Both sides have the dimension of energy density (`Pa = J/m³`): the shear modulus `1/ε₀ = G` sets the **scale of the rest-energy density** of the medium, `ρc²`. This is the second, **energetic** face of the same channel ratio: if `c = √(G/ρ)` is the dynamical one (transverse wave speed), then `G = ρc²` is the mass–energy one. The elastic (electric) tension of the medium, integrated over the volume of the defect, gives its **rest energy**:
+
+```
+∫ ρ dV = m ,        E₀ = ∫ ρc² dV = m c² .
+```
+
+**The magnetic sector supplies the kinetic energy symmetrically.** The same density `ρ = μ₀` that integrates into the mass carries, in the second (inertial) channel, not tension but motion: the magnetic energy density `½B²/μ₀ = ½ρv²`, under rigid transport of the defect at velocity `v`, integrates into the **kinetic energy**
+
+```
+T = ∫ ½ ρ v² dV = ½ m v² .
+```
+
+Thus Maxwell's two energy densities become the potential and kinetic terms of one medium with a common inertia `m = ∫ρ dV`:
+
+```
+electric / elastic    →  rest energy   E₀ = m c²    (tension,  G = ρc²)
+magnetic / inertial   →  kinetic       T  = ½ m v²  (motion,   p = ρv)
+```
+
+and their sum `m c² + ½ m v²` gives the first terms of the expansion of `γ m c²` (rest from tension, kinetics from inertia). In this picture `E = mc²` reads as **rest energy = integrated tension of the medium**: the mass of a localized defect of the director field is its elastic field energy divided by `c²`. Crucially, the coefficient in `E = mc²` is here **not borrowed from special relativity but derived**: the factor connecting inertial mass with rest energy is the square of the medium's transverse wave speed `c² = G/ρ` (6.z) — the very quantity that SR takes as a universal constant. The mechanical picture thereby **reproduces** `E = mc²` from its own moduli (`E = m·(G/ρ)`: rest energy = integrated tension, inertia = integrated density, their ratio = `G/ρ`) rather than importing it. What is fixed here is the **relation** itself (the coefficient `c² = G/ρ`); its quantitative realization — the computation of `m_e` as the minimum of `E[n, u]` — is the subject of the companion paper on the derivation of the bare electron mass.
 
 ### 6.3. Numerical checks
 
@@ -966,6 +1053,8 @@ e² · μ₀       = 4π · ℏα / c (7.16b — via density ρ ≡ μ₀)
 e² · Z₀       = 4π · ℏ · α (7.16c — via impedance Z₀ = μ₀c)
 ```
 
+Form (7.16c) is not merely our algebra: it is equivalent to the **von Klitzing relation** `Z₀ = 2α·R_K` with the Hall quantum `R_K = h/e² = 25812.807 Ω`, and is thereby **experimentally measured to `~10⁻¹⁰`** — the most precise electrical relation in metrology (details in Appendix C.1).
+
 Algebraically these are one identity; physically each form highlights a different side of the "charge ↔ medium" coupling, mirroring the symmetry of the LC cell (§5.5a, where `ω = 1/√(LC)`, `L ~ μ₀l`, `C ~ ε₀l`):
 
 | Form | What it fixes | LC analogue |
@@ -1251,7 +1340,7 @@ m_P = ℏ/(c · l_P) = 2√2 · ℏ · l_G / (c · l₀²) ≈ 2.18 × 10⁻⁸ 
 
 **Physical meaning of `l_P`.** In the Cosserat picture `l_P` is the scale at which the EM channel `n` and the gravitational channel `u` become **equally nonlinear**. A defect of size `l_P` would have a gravitational radius of order its own size — a micro black hole. For the electron `λ_C/l_P ~ 10²²` — gravitational effects in atomic physics are negligible.
 
-> **Note to the reader.** The formula `l_P = l₀²/(2√2·l_G)` geometrically means that **the Planck length is the "geometric mean"** of the two structural scales of the two channels (up to a constant): `l_P ~ √(l₀² · l₀²/l_G²)`. A small `l₀` (nanometers) and a huge `l_G` (parsecs) combine to give `~10⁻³⁵` m — the Planck length. In our picture the Planck length is therefore an intersection of two already known structural scales.
+> **Note to the reader.** The formula `l_P = l₀²/(2√2·l_G)` geometrically means that **the Planck length is `l₀` scaled down** by the same ratio `l₀/l_G` that separates `l₀` from `l_G` (up to a constant): `l_P = l₀·(l₀/l_G)/(2√2)`. A small `l₀` (nanometers) and a huge `l_G` (parsecs) combine to give `~10⁻³⁵` m — the Planck length. In our picture the Planck length is therefore an intersection of two already known structural scales.
 
 #### Equivalent rewriting: `l₀` as the geometric centre of the hierarchy
 
@@ -1588,6 +1677,9 @@ The author thanks:
 | **T15** | `l_P = l₀²/(2√2 · l_G)` (Planck length as a derived quantity) |
 | **T16** | `E = mc² = ℏc/l = ℏω` (Einstein, de Broglie, Planck as three projections of one hyperbola; physically — the resonance energy of an LC circuit `ω(l) = c/l`, see §5.4) |
 | **T17** | `E · t = m · l · c = ℏ` (universal structural identity) |
+| **T18** | `Z₀ = 2α·R_K`, `R_K = h/e²` (Hyperbola II ≡ von Klitzing relation; measured to `10⁻¹⁰`, Appendix C.1) |
+| **T19** | `[K] ↔ energy ↔ 1/m`; `λ·T = (ℏc/k_B)·(2π/x_W)` (thermal hyperbola = Wien's law, Appendix C.5) |
+| **T20** | `μ_B = e·Γ₀/(4π)`, `Γ₀ = h/m_e` (Bohr magneton = charge-area × circulation quantum, Appendix C.6) |
 
 ### A.3. The full hierarchy of structural scales
 
@@ -1683,6 +1775,138 @@ https://doi.org/10.5281/zenodo.20187199
 
 ---
 
+## Appendix C. Metrological closure, rheology of the medium, and the temperature branch
+
+*(added in version 2.1, 2026-07-02)*
+
+The dimensional reduction of §§3–6 has consequences that did not make it into the main text. They are collected here because they change the status of the program: some of its "theoretical" identities turn out to be **long-measured facts of precision metrology**, and the reduction extends naturally to the remaining SI base units. No statement in this appendix requires new postulates — everything follows from P1–P3 and Table 6.2.
+
+### C.1. Hyperbola II has already been measured: the von Klitzing relation
+
+The quantum Hall effect provides the resistance quantum (the von Klitzing constant):
+
+```
+R_K = h/e² = 25 812.807 Ω
+```
+
+— one of the most precisely reproducible quantities in physics (relative accuracy `~10⁻¹⁰`; since 2019 the value is exact by definition). Direct substitution of `ℏ = h/2π` into the impedance form of Hyperbola II (7.16c), `e²·Z₀ = 4πℏα`, gives:
+
+```
+Z₀ = 2α · R_K                                                              (C.1)
+```
+
+— numerically the identity holds to all CODATA digits (verified to 16 figures). That is, **Hyperbola II is not a construction of the program but a metrological fact of the highest available precision**; the program adds a mechanical ontology to it:
+
+- `Ω ↔ kg/(m²·s)` is an acoustic impedance (§6.2), so **the Hall quantum is a quantized mechanical impedance of the medium**, and the Hall plateaux are integer fractions of the impedance of a single knot;
+- the conductance quantum `G₀ = 2e²/h` (nanocontacts, point contacts) is a quantized mechanical admittance;
+- `α = Z₀/2R_K` reads literally: the fine-structure constant is **the ratio of the impedance of the free medium to the impedance of the knot**.
+
+### C.2. The SI-2019 pattern: exactly `{α, G}` remain free
+
+The 2019 SI reform fixed the following constants to exact values:
+
+| SI-2019 constant (exact) | Role in the Cosserat program |
+|---|---|
+| `c` | shear wave speed of the medium (T1) — conversion `s ↔ m` |
+| `h` | action quantum of microrotations (P3) — conversion `kg ↔ 1/m` |
+| `e` | cross-sectional area of the defect (T4, §7) — derived from `l₀` |
+| `k_B` | conversion `K ↔ energy` (see C.5) |
+| `N_A` | counting unit (dimensionless normalization) |
+| `Δν_Cs`, `K_cd` | operational realizations of the second and the candela |
+
+After these were fixed, exactly two quantities remained **measured** (i.e. carrying physical information rather than convention): `α` (equivalently, the pair `ε₀, μ₀` or `Z₀`, which since 2019 carry experimental uncertainty) and `G`. These are precisely **the two inputs of the Cosserat program**: `α` it *derives* (`α_bare = 1/128`, §7), and `G` it honestly *postulates* as the fourth constant (P4, §8).
+
+In other words: metrology, possessing no theory of the medium whatsoever, arrived empirically at the same partition of constants into "structural conversions" and "physical content" as the present work. SI-2019 de facto carried out half of the reduction of §6.4; the program supplies that reduction with a mechanical justification and closes one of the two remaining quantities.
+
+**The Kibble balance as the institutionalization of Hyperbola I.** Since 2019 the kilogram is *realized* through `h`: the watt balance equates the mechanical power `m·g·v` with the electrical power `U·I`, where `U` and `I` are measured via the Josephson and von Klitzing effects — that is, mass is determined by **counting quanta**. The reduction `kg ↔ 1/m` via `ℏ/c` (T7, Hyperbola I) is no longer an interpretation but the operating procedure for realizing the unit of mass.
+
+### C.3. Rheology of the medium: resistance is viscosity
+
+Table 6.2 implies a chain not spelled out in the main text:
+
+```
+[Ω·m] = kg/(m·s) = Pa·s      — resistivity ↔ DYNAMIC VISCOSITY
+```
+
+The electrical resistance of a substance is the viscosity of the medium with respect to the deformation flow (the current, `[A] ↔ m²/s`; note that the dimension of current itself coincides with kinematic viscosity and the diffusion coefficient — current is a transport coefficient). Numerically:
+
+| System | "Viscosity" |
+|---|---|
+| Copper (ρ_R = 1.68×10⁻⁸ Ω·m) | `1.7×10⁻⁸ Pa·s` |
+| Air | `1.8×10⁻⁵ Pa·s` |
+| Water | `1.0×10⁻³ Pa·s` |
+| Superconductor | `0` |
+
+A metal is a medium with negligible viscosity (three orders of magnitude below air) for the deformation flow; **superconductivity = strictly zero viscosity = superfluidity** of the deformation flow. The London equations in this language describe ideal (dissipationless) flow; the connection with superfluid helium ceases to be an analogy (they share the circulation quantum `Γ = h/m`) and becomes an identity of dimensions.
+
+Two consequences for circuit theory:
+
+```
+R·C = [kg/(m²·s)] · [m²·s²/kg] = s    — the RC time constant = the MAXWELL
+                                        relaxation time τ = viscosity × compliance
+L/R = [kg/m²] / [kg/(m²·s)] = s       — inertial relaxation
+```
+
+The electrical RC chain is literally a Maxwell rheological element (spring + damper); low-frequency electrical engineering is the rheology of the medium.
+
+**Vacuum as a viscoelastic body.** Vacuum does not conduct direct current (does not "flow"), yet transmits elastic waves perfectly. In the terms of C.3 this is standard viscoelastic behaviour — and it closes, at the level of dimensions, the famous nineteenth-century puzzle ("is the aether solid or liquid?", Stokes's pitch analogy). Significantly, the same rheological language (the standard linear Zener body, relaxation `μ_el(ω)`) is applied to the **gravitational** `u`-channel in [27]: rheology is the common formalism of both channels of the medium.
+
+### C.4. Magnetic flux is a mass flow rate (and the Table 6.2 erratum)
+
+The correct mechanical dimension of magnetic flux:
+
+```
+Wb = V·s = (kg/s²)·s = kg/s;     equivalently  T·m² = [kg/(m²·s)]·m² = kg/s
+```
+
+— a **mass flow rate** (momentum per unit length). The rows "Volt = kg/s²" and "Henry = kg/m² = Wb/A" of Table §6.2 are consistent with this.
+
+> ⚠ **Erratum.** In versions ≤ 2 of this work, the "Magnetic flux" row of Table §6.2 gave the dimension `kg·m/s` (momentum). This was an error, contradicting the neighbouring rows of the same table; the correct dimension is `kg/s`. Corrected in version 2.1.
+
+Consequences:
+
+- **The flux quantum** `Φ₀ = h/2e = 2.068×10⁻¹⁵ Wb ↔ 2.068×10⁻¹⁵ kg/s` is a **quantum of medium flow rate**: a superconducting ring quantizes not an abstract "flux" but the mass flow rate of the medium through its cross-section; a SQUID is a counter of these quanta.
+- **The Josephson effect** `V = Φ₀·f` reads mechanically: "tension (kg/s²) = flow rate (kg/s) × frequency (1/s)". The voltage standard is a count of flow-rate quanta per second.
+- The pair `(K_J = 2e/h, R_K = h/e²)` are exactly the two effects through which the Kibble balance realizes the kilogram (C.2): the metrological triangle "mass–voltage–resistance" closes inside a single mechanics of the medium.
+
+### C.5. The temperature branch: kelvin → energy, Wien as a thermal hyperbola
+
+The main text reduces `{m, kg, s, A}`; but the SI base also contains the kelvin, the mole, and the candela. The mole is a counting unit (dimensionless), the candela is anthropometric (a convolution of the watt with the sensitivity of the eye); only the kelvin carries physical content. The exact fixing of `k_B` in SI-2019 (C.2) makes the reduction trivial:
+
+```
+[K] ↔ energy ↔ 1/m      (T7):  temperature is an inverse length
+```
+
+To every temperature corresponds a length `λ(T) = ℏc/(k_B T)` — and this family is a **thermal hyperbola** `λ·T = const`, structurally parallel to Hyperbola I. Its experimental name is **Wien's displacement law**:
+
+```
+λ_max·T = b = (ℏc/k_B)·(2π/x_W),   x_W = 4.9651...  ⟹  b = 2.8978×10⁻³ m·K ✓ CODATA
+```
+
+(the dimensionless factor `x_W` is the root of the transcendental equation of the Planck spectrum; the entire dimensional part is the hyperbola of the medium).
+
+The temperature equivalent of the vacuum cell is the **structural temperature of the medium**:
+
+```
+T₀ = M₀c²/k_B = 4.984×10⁶ K
+```
+
+The physical meaning of `T₀` (candidate: the "melting" scale of the orientational order of the cell) is an open question. *A curiosity without a mechanism (status: numerology, quoted only for completeness): the temperature of the Sun's core, `15.7×10⁶ K`, relates to `T₀` as `3.150 ≈ π` (0.3%).*
+
+The full reduction of the SI base: `{m, kg, s, A, K, mol, cd} → {Energy}`.
+
+### C.6. The Bohr magneton: a bond between two quanta of the program
+
+The magnetic moment in mechanical units: `J/T ↔ m⁴/s = area × (m²/s)` — "area × circulation" (or "area × current", as in SI). The Bohr magneton is then assembled from two quanta already introduced by the program — the charge-area `e` (T4) and the circulation quantum `Γ₀ = h/m_e` (the same one that quantizes vortices in He-II):
+
+```
+μ_B = eℏ/(2m_e) = e·Γ₀/(4π) = 9.274×10⁻²⁴ J/T ✓                          (C.2)
+```
+
+The spin magnetic moment of the electron is the charge-area of the knot multiplied by the circulation quantum of the medium: the third quantum is expressed through the first two.
+
+---
+
 **End of main text.**
 
-*Version 2. Comments and feedback are welcome at: igorevsiev@gmail.com.*
+*Version 2.1. Comments and feedback are welcome at: igorevsiev@gmail.com.*
