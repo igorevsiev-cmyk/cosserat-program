@@ -2,7 +2,7 @@
 
 **Author:** Yeusiyevich Ihar V.
 **Date:** 2026-05-12
-**Version:** 2.1 (preprint; v2.1 adds Appendix C "Metrological closure, rheology of the medium, and the temperature branch", identities T18–T20, two rows of Table 6.2; the Weber dimension erratum is corrected — 2026-07-02)
+**Version:** 4 (preprint; v4 adds Appendix C "Metrological closure, rheology of the medium, and the temperature branch", identities T18–T20, two rows of Table 6.2; the Weber dimension erratum is corrected — 2026-07-02)
 **License:** CC-BY 4.0
 
 ---
@@ -1777,7 +1777,7 @@ https://doi.org/10.5281/zenodo.20187199
 
 ## Appendix C. Metrological closure, rheology of the medium, and the temperature branch
 
-*(added in version 2.1, 2026-07-02)*
+*(added in version 4, 2026-07-02)*
 
 The dimensional reduction of §§3–6 has consequences that did not make it into the main text. They are collected here because they change the status of the program: some of its "theoretical" identities turn out to be **long-measured facts of precision metrology**, and the reduction extends naturally to the remaining SI base units. No statement in this appendix requires new postulates — everything follows from P1–P3 and Table 6.2.
 
@@ -1861,7 +1861,7 @@ Wb = V·s = (kg/s²)·s = kg/s;     equivalently  T·m² = [kg/(m²·s)]·m² = 
 
 — a **mass flow rate** (momentum per unit length). The rows "Volt = kg/s²" and "Henry = kg/m² = Wb/A" of Table §6.2 are consistent with this.
 
-> ⚠ **Erratum.** In versions ≤ 2 of this work, the "Magnetic flux" row of Table §6.2 gave the dimension `kg·m/s` (momentum). This was an error, contradicting the neighbouring rows of the same table; the correct dimension is `kg/s`. Corrected in version 2.1.
+> ⚠ **Erratum.** In versions ≤ 2 of this work, the "Magnetic flux" row of Table §6.2 gave the dimension `kg·m/s` (momentum). This was an error, contradicting the neighbouring rows of the same table; the correct dimension is `kg/s`. Corrected in version 4.
 
 Consequences:
 
@@ -1909,4 +1909,4 @@ The spin magnetic moment of the electron is the charge-area of the knot multipli
 
 **End of main text.**
 
-*Version 2.1. Comments and feedback are welcome at: igorevsiev@gmail.com.*
+*Version 4. Comments and feedback are welcome at: igorevsiev@gmail.com.*
